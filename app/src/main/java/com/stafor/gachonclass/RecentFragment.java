@@ -7,11 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class MypageFragment extends Fragment {
+public class RecentFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_mypage, container, false);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_recent, container, false);
+
         return rootView;
     }
 }

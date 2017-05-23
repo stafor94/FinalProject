@@ -13,15 +13,9 @@ import android.view.KeyEvent;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
-    HomeFragment homeFrag;
-    CampusFragment classFrag;
-    MypageFragment mypageFrag;
+    CampusFragment campusFrag;
+    RecentFragment recentFrag;
     SettingsFragment settingsFrag;
-
-    final static int REQUEST_CODE = 1001;   // 로그인 요청코드
-    String name;
-    int stdNum;
-    boolean login = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +31,16 @@ public class MainActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(true);
 
         // 앱 실행 시 홈 화면을 보여준다
-        homeFrag = new HomeFragment();
-        classFrag = new CampusFragment();
-        mypageFrag = new MypageFragment();
+        campusFrag = new CampusFragment();
+        recentFrag = new RecentFragment();
         settingsFrag = new SettingsFragment();
         // 기본적으로 홈 화면을 보여줌
-        getSupportFragmentManager().beginTransaction().add(R.id.container, homeFrag).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container, campusFrag).commit();
 
         //TabLayout의 addTab() 메서드를 사용하여 탭 버튼을 추가
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
-        tabs.addTab(tabs.newTab().setText("홈"));
         tabs.addTab(tabs.newTab().setText("캠퍼스 맵"));
-        tabs.addTab(tabs.newTab().setText("내 정보"));
+        tabs.addTab(tabs.newTab().setText("최근 조회"));
         tabs.addTab(tabs.newTab().setText("설정"));
 
         //탭에 OnTabSelectedListener 설정
@@ -61,12 +53,10 @@ public class MainActivity extends AppCompatActivity {
                 Fragment selected = null;
 
                 if (position == 0) {
-                    selected = homeFrag;
+                    selected = campusFrag;
                 } else if (position == 1) {
-                    selected = classFrag;
+                    selected = recentFrag;
                 } else if (position == 2) {
-                    selected = mypageFrag;
-                } else if (position == 3) {
                     selected = settingsFrag;
                 }
                 //선택된 프래그먼트를 메인 액티비티의 contained에 담아서 표시
@@ -77,12 +67,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) { }
         });
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
     }
 

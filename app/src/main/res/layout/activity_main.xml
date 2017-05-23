@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#AAFFFF"
+        android:background="#7070F0"
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -20,19 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="60dp"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/title" />
-
-        <ImageButton
-            android:id="@+id/btn_login"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            app:srcCompat="@drawable/login_before" />
 
     </LinearLayout>
 
@@ -81,5 +70,11 @@
 
         </FrameLayout>
     </android.support.design.widget.CoordinatorLayout>
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="80dp" />
 
 </LinearLayout>

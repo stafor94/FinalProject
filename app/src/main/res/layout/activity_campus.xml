@@ -17,14 +17,11 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/builds"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:id="@+id/builds">
-
-
-        </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:gravity="fill_horizontal"
+            android:orientation="vertical"></LinearLayout>
     </ScrollView>
 
 </LinearLayout>
