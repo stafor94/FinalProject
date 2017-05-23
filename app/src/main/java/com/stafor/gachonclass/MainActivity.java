@@ -10,15 +10,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
-import static android.R.attr.id;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
-    ImageButton loginBtn;
     HomeFragment homeFrag;
     CampusFragment classFrag;
     MypageFragment mypageFrag;
@@ -36,20 +30,6 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(new Intent(this, SplashAcitivty.class)); // 스플래시 화면을 보여준다
 
-        loginBtn = (ImageButton) findViewById(R.id.btn_login);
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!login) {
-                    Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivityForResult(myIntent, REQUEST_CODE);
-                } else {
-                    login = false;
-                    loginBtn.setImageResource(R.drawable.login_before);
-                    Toast.makeText(getApplicationContext(), R.string.logout, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);   // 메서드를 사용해 액션바로 설정
@@ -104,15 +84,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                stdNum = data.getIntExtra("stdNum", 0); // Intent를 통해 id를 전달받는다
-                name = data.getStringExtra("name"); // Intent를 통해 이름을 전달받는다
-                Toast.makeText(this, "'" + id + "' 님 환영합니다.", Toast.LENGTH_SHORT).show();
-                login = true;   // 로그인 상태를 true로 설정
-                loginBtn.setImageResource(R.drawable.login_after);
-            }
-        }
     }
 
     @Override
