@@ -28,7 +28,7 @@
                     android:layout_marginTop="10dp"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
-                    android:text="계정"
+                    android:text="내 정보"
                     android:textColor="#1010FF"
                     android:textSize="15sp" />
 
@@ -52,28 +52,6 @@
                     android:textColor="@android:color/darker_gray"
                     android:textSize="20sp" />
 
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:gravity="left|center_vertical"
-                    android:paddingBottom="20dp"
-                    android:paddingTop="20dp"
-                    android:text="비밀번호 변경"
-                    android:textSize="20sp" />
-
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/transparent"
-                    android:gravity="left|center_vertical"
-                    android:paddingBottom="20dp"
-                    android:paddingTop="20dp"
-                    android:text="기록"
-                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -95,8 +73,48 @@
                     android:textColor="#1010FF"
                     android:textSize="15sp" />
 
+                <Switch
+                    android:id="@+id/switch1"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="진동"
+                    android:textSize="20sp" />
+
+                <Switch
+                    android:id="@+id/switch2"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="소리"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="문의하기"
+                    android:textColor="#1010FF"
+                    android:textSize="15sp" />
+
                 <Button
-                    android:id="@+id/button4"
+                    android:id="@+id/button2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
@@ -104,15 +122,15 @@
                     android:gravity="left|center_vertical"
                     android:paddingBottom="20dp"
                     android:paddingTop="20dp"
-                    android:text="알림 설정"
+                    android:text="개발자 이메일"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/tv_alram"
+                    android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="10dp"
-                    android:text="알림꺼짐"
+                    android:text="evry1457@gmail.com"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="20sp" />
             </LinearLayout>

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class SettingsFragment extends Fragment {
-    TextView nameText, alramText, versionText;
+    TextView nameText, versionText;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -18,7 +18,6 @@ public class SettingsFragment extends Fragment {
         MainActivity activity = (MainActivity) getActivity();
 
         nameText = (TextView) rootView.findViewById(R.id.tv_name);
-        alramText = (TextView) rootView.findViewById(R.id.tv_alram);
         versionText = (TextView) rootView.findViewById(R.id.tv_version);
 
         return rootView;
