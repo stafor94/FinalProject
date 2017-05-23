@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="building">
+        <item >가천관</item>
+        <item >비전타워</item>
+        <item >공과대학</item>
+        <item >IT대학</item>
+        <item >한의과대학</item>
+        <item >예술대학</item>
+        <item >글로벌센터</item>
+    </string-array>
+    <string-array name="stair">
+        <item>1층</item>
+        <item>2층</item>
+        <item>3층</item>
+        <item>4층</item>
+        <item>5층</item>
+        <item>6층</item>
+    </string-array>
+</resources>
