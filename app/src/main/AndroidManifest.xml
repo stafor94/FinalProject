@@ -19,6 +19,7 @@
         </activity>
         <activity android:name=".SplashAcitivty" android:theme="@style/NoTitle" />
         <activity android:name=".ImageActivity" android:theme="@style/NoTitle" />
+        <activity android:name=".SeekActivity"></activity>
     </application>
 
 </manifest>
