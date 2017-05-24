@@ -10,8 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import static com.stafor.gachonclass.R.array.building;
-
 public class SeekActivity extends AppCompatActivity {
     Button spreadBtn, spread2Btn;
     Button[] floorBtns = new Button[15];
@@ -19,7 +17,9 @@ public class SeekActivity extends AppCompatActivity {
     ImageView imageView;
     boolean[] isSpeard = new boolean[2];
     TextView floorTv;
-    String floor = "1F";
+    String floor = "1";
+    String building = "";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +33,7 @@ public class SeekActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
 
         Intent myIntent = getIntent();
-        String building = myIntent.getStringExtra("building");
+        building = myIntent.getStringExtra("building");
         floorTv.setText(building + " " + floor + "F");
         createFloors(building);
 
@@ -83,6 +83,19 @@ public class SeekActivity extends AppCompatActivity {
             createButtons(-2, 4);
         else if(building.equals("공과대학2"))
             createButtons(1, 6);
+        else if(building.equals("IT대학"))
+            createButtons(1, 6);
+        else if(building.equals("한의과대학"))
+            createButtons(1, 5);
+        else if(building.equals("예술대학1"))
+            createButtons(1, 5);
+        else if(building.equals("예술대학2"))
+            createButtons(1, 5);
+        else if(building.equals("글로벌센터"))
+            createButtons(1, 6);
+
+
+
     }
 
     public void createButtons(int first, int last) {
