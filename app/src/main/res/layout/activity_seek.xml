@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_dark"
+        android:background="#055299"
         android:orientation="horizontal">
 
         <TextView
@@ -45,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#55A299"
             android:text="층 수▽"
             android:textColor="#FFFFFF" />
 
@@ -57,17 +62,18 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:visibility="gone"
-            app:srcCompat="@drawable/build_gachon" />
+            app:srcCompat="@drawable/build_art" />
 
         <Button
             android:id="@+id/btn_spread2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="#55A299"
             android:text="단면도▽"
             android:textColor="#FFFFFF" />
 
@@ -79,5 +85,4 @@
         android:layout_height="match_parent">
 
     </FrameLayout>
-
 </LinearLayout>
