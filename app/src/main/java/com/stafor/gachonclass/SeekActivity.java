@@ -6,14 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SeekActivity extends AppCompatActivity {
     Button spreadBtn, spread2Btn;
     Button[] floorBtns = new Button[15];
-    LinearLayout layout;
+    GridLayout layout;
     ImageView imageView;
     boolean[] isSpeard = new boolean[2];
     TextView floorTv;
@@ -29,7 +29,7 @@ public class SeekActivity extends AppCompatActivity {
         isSpeard[1] = false;
 
         floorTv = (TextView) findViewById(R.id.textView);
-        layout = (LinearLayout) findViewById(R.id.layout_floors);
+        layout = (GridLayout) findViewById(R.id.layout_floors);
         imageView = (ImageView) findViewById(R.id.imageView);
 
         Intent myIntent = getIntent();
@@ -93,9 +93,6 @@ public class SeekActivity extends AppCompatActivity {
             createButtons(1, 5);
         else if(building.equals("글로벌센터"))
             createButtons(1, 6);
-
-
-
     }
 
     public void createButtons(int first, int last) {

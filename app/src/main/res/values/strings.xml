@@ -1,9 +1,4 @@
 <resources>
-    <string name="app_name">GachonClass</string>
-    <string name="success_login">로그인에 성공했습니다.</string>
-    <string name="fail_login">아이디와 비밀번호를 확인하세요.</string>
-    <string name="logout">로그아웃 되었습니다.</string>
+    <string name="app_name">가천Class</string>
     <string name="finish">정말로 종료하시겠습니까?</string>
-    <string name="fail_password">비밀번호가 서로 다릅니다.</string>
-    <string name="fail_signin">잘못된 입력입니다.</string>
 </resources>

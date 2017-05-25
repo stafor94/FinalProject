@@ -29,26 +29,24 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <HorizontalScrollView
+        <GridLayout
+            android:id="@+id/layout_floors"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"
+            android:columnCount="4"
+            android:visibility="gone">
 
-            <LinearLayout
-                android:id="@+id/layout_floors"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-            </LinearLayout>
-        </HorizontalScrollView>
+        </GridLayout>
 
         <Button
             android:id="@+id/btn_spread"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="층 수▽" />
+            android:text="층 수▽"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
@@ -70,13 +68,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="단면도▽" />
+            android:text="단면도▽"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+        android:layout_height="match_parent">
+
+    </FrameLayout>
 
 </LinearLayout>
