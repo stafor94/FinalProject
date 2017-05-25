@@ -24,7 +24,7 @@
             android:paddingTop="10dp"
             android:text="가천관 1F"
             android:textColor="@android:color/background_light"
-            android:textSize="30sp" />
+            android:textSize="34dp" />
 
     </LinearLayout>
 
