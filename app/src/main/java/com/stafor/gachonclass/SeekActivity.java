@@ -3,27 +3,31 @@ package com.stafor.gachonclass;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class SeekActivity extends AppCompatActivity {
+    Fragment fragment;
+
     Button spreadBtn, spread2Btn;
     Button[] floorBtns = new Button[15];
     GridLayout layout;
     ImageView imageView;
     boolean[] isSpeard = new boolean[2];
     TextView floorTv;
-    String floor = "1";
-    String building = "";
-
+    String floor = "1", building;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_seek);
+        this.setFinishOnTouchOutside(false); // 바깥영역 터치로 인한 종료 방지
 
         isSpeard[0] = false;
         isSpeard[1] = false;
@@ -113,6 +117,13 @@ public class SeekActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     floor = ((Button)v).getText().toString();
                     floorTv.setText(building + " " + floor + "F");
+
+                    fragment = new ClassFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("building", building);
+                    bundle.putString("floor", floor);
+                    fragment.setArguments(bundle);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
                 }
             });
             count++;
