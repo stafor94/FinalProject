@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#055299"
+        android:background="#053463"
         android:orientation="horizontal"
         android:weightSum="1">
 
@@ -74,13 +74,15 @@
             <android.support.design.widget.TabLayout
                 android:id="@+id/tabs"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="36dp"
                 android:background="@android:color/background_light"
                 android:elevation="1dp"
                 app:tabGravity="fill"
                 app:tabMode="fixed"
-                app:tabSelectedTextColor="@color/colorAccent"
-                app:tabTextColor="@color/colorPrimary" />
+                app:tabSelectedTextColor="#053463"
+                app:tabTextColor="#000000"
+                app:tabIndicatorColor="#053463"
+                />
 
         </android.support.design.widget.AppBarLayout>
 

@@ -1,204 +1,253 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1">
-
-    <ImageView
-        android:id="@+id/img_campus"
+    android:weightSum="1"
+    android:background="#e8e8e8"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/campus" />
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/btn_b0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="sans-serif"
-            android:tag="build0"
-            android:text="가천관"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/btn_b1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="sans-serif"
-            android:tag="build1"
-            android:text="비전타워"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
-
-        <Button
-            android:id="@+id/btn_b2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="sans-serif"
-            android:tag="build2"
-            android:text="법과대학"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+        <ImageView
+            android:id="@+id/img_campus"
+            android:layout_width="match_parent"
+            android:layout_height="212dp"
+            android:background="@drawable/campusmap"
+            android:layout_marginBottom="3dp"/>
     </LinearLayout>
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:orientation="vertical"
+         android:background="#e8e8e8"
+         >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_b3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="sans-serif"
-            android:tag="build3"
-            android:text="공과대학1"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+                    >
 
-        <Button
-            android:id="@+id/btn_b4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="sans-serif"
-            android:tag="build4"
-            android:text="공과대학2"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+                 <Button
+                     android:id="@+id/btn_b0"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_margin="1.5dp"
+                     android:tag="build0"
+                     android:background="@drawable/gachon_structure"
+                     />
 
-        <Button
-            android:id="@+id/btn_b5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="sans-serif"
-            android:tag="build5"
-            android:text="바이오나노대학"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+             </LinearLayout>
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_weight="1">
+                     <Button
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:layout_margin="1.5dp"
+                         android:id="@+id/btn_b1"
+                         android:tag="build1"
+                         android:background="@drawable/visiontower"
+                         />
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+                 </LinearLayout>
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_weight="1">
+                     <Button
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:layout_margin="1.5dp"
+                         android:id="@+id/btn_b2"
+                         android:tag="build2"
+                         android:background="@drawable/law"
+                         />
+                 </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_b6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="sans-serif"
-            android:tag="build6"
-            android:text="IT대학"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_b7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="sans-serif"
-            android:tag="build7"
-            android:text="한의과대학"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:layout_gravity="center_horizontal"
+             android:gravity="center_horizontal"
+             android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_b8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="sans-serif"
-            android:tag="build8"
-            android:text="예술대학1"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+                 >
+                 <Button
+                     android:id="@+id/btn_b3"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_margin="1.5dp"
+                     android:tag="build3"
+                     android:background="@drawable/engineering1"
+                    />
 
-    </LinearLayout>
+             </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+                 >
+                 <Button
+                     android:id="@+id/btn_b4"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_margin="1.5dp"
+                     android:tag="build4"
+                     android:background="@drawable/engineering2"/>
 
-        <Button
-            android:id="@+id/btn_b9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="sans-serif"
-            android:tag="build9"
-            android:text="예술대학2"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+             </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_b10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/rounded_corner"
-            android:fontFamily="sans-serif"
-            android:tag="build10"
-            android:text="글로벌센터"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+                 >
+                 <Button
+                     android:id="@+id/btn_b5"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_margin="1.5dp"
+                     android:tag="build5"
+                     android:background="@drawable/nano"
+                    />
+             </LinearLayout>
 
-    </LinearLayout>
+
+
+
+
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:layout_gravity="center_horizontal"
+             android:gravity="center_horizontal"
+             android:orientation="horizontal">
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1">
+
+                 <Button
+                     android:id="@+id/btn_b6"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_margin="1.5dp"
+                     android:tag="build6"
+                     android:background="@drawable/computer"/>
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1">
+
+                 <Button
+                     android:id="@+id/btn_b7"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_margin="1.5dp"
+                     android:tag="build7"
+                     android:background="@drawable/medicine"
+                    />
+
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1">
+
+                 <Button
+                     android:id="@+id/btn_b8"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_margin="1.5dp"
+                     android:background="@drawable/art1"
+                     android:tag="build8" />
+
+             </LinearLayout>
+
+
+         </LinearLayout>
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_gravity="center_horizontal"
+             android:layout_weight="1"
+             android:gravity="center_horizontal"
+             android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_b9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1.5dp"
+                android:tag="build9"
+                android:background="@drawable/art2"/>
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1"
+                 >
+
+                 <Button
+                     android:id="@+id/btn_b10"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:layout_margin="1.5dp"
+                     android:background="@drawable/english"
+                     android:tag="build10" />
+
+             </LinearLayout>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_margin="1.5dp"
+                 android:layout_weight="1"
+                 android:background="#ffffff">
+
+             </LinearLayout>
+
+
+
+
+
+         </LinearLayout>
+
+
+     </LinearLayout>
+
 
 </LinearLayout>
