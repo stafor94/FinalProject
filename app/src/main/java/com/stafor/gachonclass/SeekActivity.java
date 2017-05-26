@@ -14,14 +14,18 @@ import android.widget.TextView;
 
 public class SeekActivity extends AppCompatActivity {
     Fragment fragment;
-
     Button spreadBtn, spread2Btn;
     Button[] floorBtns = new Button[15];
     GridLayout layout;
     ImageView imageView;
-    boolean[] isSpeard = new boolean[2];
     TextView floorTv;
+
     String floor = "1", building;
+    boolean[] isSpeard = {false, false};
+
+    String rooms[] = new String[10];
+    DBHelper dbHelper;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,50 +33,53 @@ public class SeekActivity extends AppCompatActivity {
         setContentView(R.layout.activity_seek);
         this.setFinishOnTouchOutside(false); // 바깥영역 터치로 인한 종료 방지
 
-        isSpeard[0] = false;
-        isSpeard[1] = false;
+        dbHelper = new DBHelper(this);
 
+        setUp();
+    }
+
+    public void setUp() {
         floorTv = (TextView) findViewById(R.id.textView);
         layout = (GridLayout) findViewById(R.id.layout_floors);
         imageView = (ImageView) findViewById(R.id.imageView);
+        spreadBtn = (Button) findViewById(R.id.btn_spread);
+        spread2Btn = (Button) findViewById(R.id.btn_spread2);
+        spreadBtn.setOnClickListener(myListener);
+        spread2Btn.setOnClickListener(myListener);
 
         Intent myIntent = getIntent();
         building = myIntent.getStringExtra("building");
         floorTv.setText(building + " " + floor + "F");
         createFloors(building);
 
-        spreadBtn = (Button) findViewById(R.id.btn_spread);
-        spreadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+        rooms = dbHelper.select(Integer.parseInt(floor));
+    }
+
+    View.OnClickListener myListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.btn_spread) {
                 if (isSpeard[0]) {
-                    isSpeard[0] = false;
                     layout.setVisibility(View.GONE);
                     spreadBtn.setText("층수▽");
                 } else {
-                    isSpeard[0] = true;
                     layout.setVisibility(View.VISIBLE);
                     spreadBtn.setText("층수△");
                 }
-            }
-        });
-        spread2Btn = (Button) findViewById(R.id.btn_spread2);
-        spread2Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                isSpeard[0] = !isSpeard[0];
+            } else if (v.getId() == R.id.btn_spread2) {
                 if (isSpeard[1]) {
-                    isSpeard[1] = false;
                     imageView.setVisibility(View.GONE);
                     spread2Btn.setText("단면도▽");
                 } else {
-                    isSpeard[1] = true;
                     imageView.setVisibility(View.VISIBLE);
                     spread2Btn.setText("단면도△");
                 }
+                isSpeard[1] = !isSpeard[1];
             }
-        });
-
-    }
+        }
+    };
 
     public void createFloors(String building) {
         if (building.equals("가천관"))

@@ -42,9 +42,10 @@
                      android:layout_width="match_parent"
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
-                     android:tag="build0"
                      android:background="@drawable/gachon_structure"
-                     />
+                     android:tag="build0"
+                     android:text="가천관"
+                     android:textColor="@android:color/transparent" />
 
              </LinearLayout>
                  <LinearLayout
@@ -57,6 +58,8 @@
                          android:layout_margin="1.5dp"
                          android:id="@+id/btn_b1"
                          android:tag="build1"
+                         android:text="비전타워"
+                         android:textColor="@android:color/transparent"
                          android:background="@drawable/visiontower"
                          />
 
@@ -72,6 +75,8 @@
                          android:layout_margin="1.5dp"
                          android:id="@+id/btn_b2"
                          android:tag="build2"
+                         android:text="법과대학"
+                         android:textColor="@android:color/transparent"
                          android:background="@drawable/law"
                          />
                  </LinearLayout>
@@ -97,6 +102,8 @@
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
                      android:tag="build3"
+                     android:text="공과대학1"
+                     android:textColor="@android:color/transparent"
                      android:background="@drawable/engineering1"
                     />
 
@@ -113,6 +120,8 @@
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
                      android:tag="build4"
+                     android:text="공과대학2"
+                     android:textColor="@android:color/transparent"
                      android:background="@drawable/engineering2"/>
 
              </LinearLayout>
@@ -128,6 +137,8 @@
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
                      android:tag="build5"
+                     android:text="바이오나노대학"
+                     android:textColor="@android:color/transparent"
                      android:background="@drawable/nano"
                     />
              </LinearLayout>
@@ -158,6 +169,8 @@
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
                      android:tag="build6"
+                     android:text="IT대학"
+                     android:textColor="@android:color/transparent"
                      android:background="@drawable/computer"/>
              </LinearLayout>
 
@@ -172,6 +185,8 @@
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
                      android:tag="build7"
+                     android:text="한의과대학"
+                     android:textColor="@android:color/transparent"
                      android:background="@drawable/medicine"
                     />
 
@@ -188,7 +203,9 @@
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
                      android:background="@drawable/art1"
-                     android:tag="build8" />
+                     android:tag="build8"
+                     android:text="예술대학1"
+                     android:textColor="@android:color/transparent"  />
 
              </LinearLayout>
 
@@ -213,6 +230,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="1.5dp"
                 android:tag="build9"
+                android:text="예술대학2"
+                android:textColor="@android:color/transparent"
                 android:background="@drawable/art2"/>
              </LinearLayout>
 
@@ -228,7 +247,9 @@
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
                      android:background="@drawable/english"
-                     android:tag="build10" />
+                     android:tag="build10"
+                     android:text="글로벌센터"
+                     android:textColor="@android:color/transparent" />
 
              </LinearLayout>
              <LinearLayout
