@@ -33,7 +33,7 @@
                     android:textSize="15sp" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/btn_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -78,6 +78,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="true"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="진동"
@@ -88,6 +89,7 @@
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:checked="true"
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="소리"
