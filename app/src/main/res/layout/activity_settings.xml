@@ -1,65 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/border"
-                android:orientation="vertical"
-                android:paddingLeft="10dp">
+                android:background="#b3b3b3"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:layout_height="36dp"
+                    android:background="#24839b"
+                    android:gravity="center"
                     android:text="내 정보"
-                    android:textColor="#1010FF"
-                    android:textSize="15sp" />
+                    android:textColor="#ffffff"
+                    android:textSize="25dp" />
 
                 <Button
                     android:id="@+id/btn_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
+                    android:layout_marginBottom="1dp"
+                    android:layout_marginTop="1dp"
+                    android:background="#ffffff"
                     android:gravity="left|center_vertical"
                     android:paddingBottom="20dp"
                     android:paddingTop="20dp"
-                    android:text="프로필"
-                    android:textSize="20sp" />
+                    android:text="  프로필"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop= "5dp"
                     android:text="홍길동"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="#ffffff"/>
 
                 <TextView
                     android:id="@+id/tv_major"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
                     android:text="학과"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="15sp" />
+                    android:textSize="15dp"
+                    android:background="#ffffff"
+                    android:layout_marginBottom="1dp"/>
 
             </LinearLayout>
 
@@ -67,20 +63,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/border"
-                android:orientation="vertical"
-                android:paddingLeft="10dp">
+                android:background="#ffffff"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:layout_height="36dp"
+                    android:gravity="center"
+                    android:background="#24839b"
                     android:text="알림"
-                    android:textColor="#1010FF"
-                    android:textSize="15sp" />
+                    android:textColor="#ffffff"
+                    android:textSize="25dp" />
 
                 <Switch
                     android:id="@+id/switch1"
@@ -91,7 +85,9 @@
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="진동"
-                    android:textSize="20sp" />
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20sp"
+                    />
 
                 <Switch
                     android:id="@+id/switch2"
@@ -102,7 +98,9 @@
                     android:paddingBottom="5dp"
                     android:paddingTop="5dp"
                     android:text="소리"
-                    android:textSize="20sp" />
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20sp"
+                    android:layout_marginBottom="1dp"/>
 
             </LinearLayout>
 
@@ -110,83 +108,78 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/border"
+                android:background="#b3b3b3"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:layout_height="36dp"
+                    android:background="#24839b"
+                    android:gravity="center"
                     android:text="문의하기"
-                    android:textColor="#1010FF"
-                    android:textSize="15sp" />
+                    android:textColor="#ffffff"
+                    android:textSize="25dp" />
 
                 <Button
                     android:id="@+id/button2"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/transparent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
                     android:gravity="left|center_vertical"
                     android:paddingBottom="20dp"
                     android:paddingTop="20dp"
+                    android:layout_marginBottom="1dp"
                     android:text="개발자 이메일"
-                    android:textSize="20sp" />
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
                     android:text="evry1457@gmail.com"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="#ffffff"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/border"
-                android:orientation="vertical"
-                android:paddingLeft="10dp">
+                android:background="#b3b3b3"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="5dp"
+                    android:layout_height="36dp"
+                    android:background="#24839b"
+                    android:gravity="center"
+
                     android:text="정보"
-                    android:textColor="#1010FF"
-                    android:textSize="15sp" />
+                    android:textColor="#ffffff"
+                    android:textSize="25dp" />
 
                 <Button
                     android:id="@+id/button5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:background="@android:color/transparent"
+                    android:layout_marginBottom="1dp"
+                    android:background="#ffffff"
                     android:gravity="left|center_vertical"
-                    android:paddingBottom="20dp"
-                    android:paddingTop="20dp"
-                    android:text="버전 정보"
+                    android:text="  버전 정보"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tv_version"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
                     android:text="1.0.1 (최신)"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:background="#ffffff"/>
             </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+ </LinearLayout>
