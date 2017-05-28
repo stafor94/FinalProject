@@ -1,6 +1,8 @@
 package com.stafor.gachonclass;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,6 +19,16 @@ public class ClassFragment extends Fragment {
     String building, floor, classRoom;
     Button[] buttons;
     AlertDialog.Builder builder;
+    String gachonTel = "031-750-5151";  //가천관 번호
+    String visionTel = "031-750-5551";  //비전타워 번호
+    String lawTel = "031-750-8621";  //법과대학 번호
+    String engineeringTel = "031-750-5271"; //공과대학
+    String nanoTel = "031-750-5381"; //바이오나노
+    String itTel = "031-750-5661";
+    String medicineTel = "031-750-5401"; //한의학
+    String artTel = "031-750-5851"; //예술대
+    String englishTel = "031-750-5114";  //학교번호
+
     final String[] items = {"수업정보 조회", "시간표 조회", "알림설정", "예약문의"};
 
     @Nullable
@@ -33,6 +45,10 @@ public class ClassFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getContext(), items[which] + " 선택!", Toast.LENGTH_SHORT).show();
+                if(which ==3 && building.equals("IT대학")){
+                    Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" +itTel));
+                    startActivity(callIntent);
+                }
             }
         });
         builder.create();

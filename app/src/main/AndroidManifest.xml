@@ -21,6 +21,6 @@
         <activity android:name=".ImageActivity" android:theme="@style/NoTitle" />
         <activity android:name=".SeekActivity" />
         <activity android:name=".ProfileActivity" />
-    </application>
 
+    </application>
 </manifest>
