@@ -81,7 +81,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 String name = edit_name.getText().toString().trim();    // 공백 제거
                 String major = mSpinner.getSelectedItem().toString().trim();
                 dbHelper.insert(name, Integer.toString(grade), major);
-                MainActivity.name = name;
+                MainActivity.name = dbHelper.printData(1);
+                MainActivity.major = dbHelper.printData(3);
 
                 Intent myIntent = new Intent();
                 setResult(RESULT_OK, myIntent);

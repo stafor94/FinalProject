@@ -2,7 +2,6 @@ package com.stafor.gachonclass;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -21,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
     private DBHelper_Profile dbHelper;
     SQLiteDatabase db;
-    Cursor cursor;
     public static String name = "";
+    public static String major = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         dbHelper = new DBHelper_Profile(this);
         db = dbHelper.getReadableDatabase();
-        try {
-            cursor = db.rawQuery("SELECT * FROM profileTable;",null);
-            name = cursor.getString(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        name = dbHelper.printData(1);
+        major = dbHelper.printData(3);
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);   // 메서드를 사용해 액션바로 설정
         ActionBar actionBar = getSupportActionBar();
@@ -97,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             moveTaskToBack(true);	// protect Other Activity after this Activity finish
                             finish();
+                            android.os.Process.killProcess(android.os.Process.myPid());
                         }
                     })
                     .setNegativeButton("취소", null)

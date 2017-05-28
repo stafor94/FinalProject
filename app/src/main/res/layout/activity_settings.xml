@@ -52,6 +52,15 @@
                     android:textColor="@android:color/darker_gray"
                     android:textSize="20sp" />
 
+                <TextView
+                    android:id="@+id/tv_major"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:text="학과"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp" />
+
             </LinearLayout>
 
             <LinearLayout

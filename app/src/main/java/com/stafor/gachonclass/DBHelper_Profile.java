@@ -15,7 +15,7 @@ public class DBHelper_Profile extends SQLiteOpenHelper {
     // Database name
     private static final String DATABASE_NAME = "Profile.db";
     // Database version
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 10;
     // Table name
     private static final String TABLE_NAME = "profileTable";
 
@@ -52,8 +52,6 @@ public class DBHelper_Profile extends SQLiteOpenHelper {
     public void insert(String name, String grade, String major) {
         db = getWritableDatabase();
 
-        db.execSQL("Delete FROM " + TABLE_NAME + ";");
-
         db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES(null, '" + name + "', " + grade + ", '" + major + "');");
         db.close();
     }
@@ -75,7 +73,7 @@ public class DBHelper_Profile extends SQLiteOpenHelper {
 
         if (cursor.moveToLast() == false) {
             str = "";
-        } else if (index != 1) {
+        } else if (index != 2) {
             str += cursor.getString(index);
         } else {
             str += Integer.toString(cursor.getInt(index));

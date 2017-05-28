@@ -125,12 +125,12 @@ public class SeekActivity extends AppCompatActivity {
     public void createButtons(int first, int last) {
         count = 0;
         for (int i = first; i <= last; i++) {
+            if (i == 0) // 0층은 없다
+                continue;
+
             floorBtns[count] = new Button(this);
             if (i < 0) {
                 floorBtns[count].setText("B" + Integer.toString(-i));   // 지하
-            } else if (i == 0) {    // 0 처리
-                i++;
-                continue;
             } else if (i > 0) { // 지상
                 floorBtns[count].setText(Integer.toString(i));
             }
@@ -139,8 +139,8 @@ public class SeekActivity extends AppCompatActivity {
             floorBtns[count].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    select = Integer.parseInt(((Button)v).getText().toString()) - 1;    // [] 0 ~ 5
                     if(building.equals("IT대학")) {
+                        select = Integer.parseInt(((Button)v).getText().toString()) - 1;    // [] 0 ~ 5
                         imageView.setImageResource(sectionItImage[select]); //층수 누를때마다 단면도 바뀌게
                     }
 
@@ -151,6 +151,7 @@ public class SeekActivity extends AppCompatActivity {
                     Bundle bundle = new Bundle();
                     bundle.putString("building", building);
                     bundle.putString("floor", floor);
+
                     fragment.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
                 }

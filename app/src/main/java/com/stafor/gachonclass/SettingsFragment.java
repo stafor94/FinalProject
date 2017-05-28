@@ -14,7 +14,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener {
     private DBHelper_Profile dbHelper;
-    TextView nameText, versionText;
+    TextView nameText, majorText, versionText;
     Button profileBtn;
     String name = "홍길동";
 
@@ -27,11 +27,13 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         dbHelper = new DBHelper_Profile(getContext());
 
         nameText = (TextView) rootView.findViewById(R.id.tv_name);
+        majorText = (TextView) rootView.findViewById(R.id.tv_major);
         versionText = (TextView) rootView.findViewById(R.id.tv_version);
         profileBtn = (Button) rootView.findViewById(R.id.btn_profile);
         profileBtn.setOnClickListener(this);
 
         nameText.setText(MainActivity.name);
+        majorText.setText(MainActivity.major);
 
         return rootView;
     }
@@ -50,8 +52,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
 
         if (requestCode == REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                name = dbHelper.printData(0);
                 nameText.setText(MainActivity.name);
+                majorText.setText(MainActivity.major);
             }
         }
     }
