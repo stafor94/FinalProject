@@ -1,13 +1,20 @@
 package com.stafor.gachonclass;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -15,18 +22,51 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     Spinner mSpinner;
     ArrayAdapter<String> mSpinnerAdapter = null;
     EditText edit_name;
+    RadioGroup radioGroup;
     Button okBtn, cancelBtn;
+    private DBHelper_Profile dbHelper;
+    SQLiteDatabase db;
+    Cursor cursor;
+    int grade = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        dbHelper = new DBHelper_Profile(this);
+        db = dbHelper.getWritableDatabase();
+        try {
+            cursor = db.rawQuery("SELECT * FROM profileTable;", null);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         edit_name = (EditText) findViewById(R.id.editName);
         cancelBtn = (Button) findViewById(R.id.btn_cancel);
         okBtn = (Button) findViewById(R.id.btn_ok);
         cancelBtn.setOnClickListener(this);
         okBtn.setOnClickListener(this);
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                // 키보드 사라지게 하기
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(edit_name.getWindowToken(), 0);
+
+                if (checkedId == R.id.rb_1)
+                    grade = 1;
+                else if (checkedId == R.id.rb_2)
+                    grade = 2;
+                else if (checkedId == R.id.rb_3)
+                    grade = 3;
+                else if (checkedId == R.id.rb_4)
+                    grade = 4;
+                else if (checkedId == R.id.rb_5)
+                    grade = 5;
+            }
+        });
+
         mSpinner = (Spinner) findViewById(R.id.spinner);
         mSpinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,
                 (String[])getResources().getStringArray(R.array.major));
@@ -44,11 +84,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             finish();
         }
         if (v.getId() == R.id.btn_ok) {
-            Toast.makeText(this, "프로필이 수정되었습니다.", Toast.LENGTH_SHORT).show();
-            Intent myIntent = new Intent();
-            myIntent.putExtra("name", edit_name.getText().toString());
-            setResult(RESULT_OK, myIntent);
-            finish();
+            if (edit_name.getText().toString().length() < 2 || grade == 0 || mSpinner.getSelectedItem() == null) {
+                Toast.makeText(this, "다시 한번 확인해 주세요.", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "프로필이 수정되었습니다.", Toast.LENGTH_SHORT).show();
+                String name = edit_name.getText().toString().trim();    // 공백 제거
+                String major = mSpinner.getSelectedItem().toString().trim();
+                dbHelper.insert(name, grade, major);
+                MainActivity.name = name;
+
+                Intent myIntent = new Intent();
+                setResult(RESULT_OK, myIntent);
+                finish();
+            }
         }
     }
 }
