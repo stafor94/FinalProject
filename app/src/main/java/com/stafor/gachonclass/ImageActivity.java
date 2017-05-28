@@ -1,7 +1,6 @@
 package com.stafor.gachonclass;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,9 +21,7 @@ public class ImageActivity extends AppCompatActivity {
 
         // 인텐트를 전달받아서 이미지를 설정
         Intent myIntent = getIntent();
-        Resources res = getResources();
-        bitmap = (BitmapDrawable) res.getDrawable(myIntent.getIntExtra("img", 0));
-        imageView.setImageDrawable(bitmap);
+        imageView.setImageResource(myIntent.getIntExtra("img", 0));
 
         // 이미지뷰 핀치줌, 확대, 축소
         PhotoViewAttacher attacher = new PhotoViewAttacher(imageView);

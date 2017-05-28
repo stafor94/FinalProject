@@ -2,6 +2,8 @@ package com.stafor.gachonclass;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,7 +12,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -18,7 +19,11 @@ public class MainActivity extends AppCompatActivity {
     RecentFragment recentFrag;
     SettingsFragment settingsFrag;
 
-    Button btn_menu;    //mainActivity 우측상단 프로필버튼
+    private DBHelper_Profile dbHelper;
+    SQLiteDatabase db;
+    Cursor cursor;
+    public static String name = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(new Intent(this, SplashAcitivty.class)); // 스플래시 화면을 보여준다
 
-
+        dbHelper = new DBHelper_Profile(this);
+        db = dbHelper.getReadableDatabase();
+        try {
+            cursor = db.rawQuery("SELECT * FROM profileTable;",null);
+            name = cursor.getString(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);   // 메서드를 사용해 액션바로 설정
         ActionBar actionBar = getSupportActionBar();
@@ -92,5 +104,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        moveTaskToBack(true);	// protect Other Activity after this Activity finish
+        finish();
     }
 }

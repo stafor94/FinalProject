@@ -2,9 +2,6 @@ package com.stafor.gachonclass;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -25,8 +22,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     RadioGroup radioGroup;
     Button okBtn, cancelBtn;
     private DBHelper_Profile dbHelper;
-    SQLiteDatabase db;
-    Cursor cursor;
     int grade = 0;
 
     @Override
@@ -35,12 +30,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_profile);
 
         dbHelper = new DBHelper_Profile(this);
-        db = dbHelper.getWritableDatabase();
-        try {
-            cursor = db.rawQuery("SELECT * FROM profileTable;", null);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+
         edit_name = (EditText) findViewById(R.id.editName);
         cancelBtn = (Button) findViewById(R.id.btn_cancel);
         okBtn = (Button) findViewById(R.id.btn_ok);
@@ -90,7 +80,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(this, "프로필이 수정되었습니다.", Toast.LENGTH_SHORT).show();
                 String name = edit_name.getText().toString().trim();    // 공백 제거
                 String major = mSpinner.getSelectedItem().toString().trim();
-                dbHelper.insert(name, grade, major);
+                dbHelper.insert(name, Integer.toString(grade), major);
                 MainActivity.name = name;
 
                 Intent myIntent = new Intent();
