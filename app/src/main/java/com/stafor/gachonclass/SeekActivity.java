@@ -89,7 +89,7 @@ public class SeekActivity extends AppCompatActivity {
                     spread2Btn.setText("단면도△");
                 }
                 isSpeard[1] = !isSpeard[1];
-            } else if (v.getId() == R.id.imageView) {
+            } else if (v.getId() == R.id.imageView && building.equals("IT대학")) {
                 Intent intent = new Intent(getApplicationContext(), ImageActivity.class);
                 intent.putExtra("img", sectionItImage[select]);      // << 이부분을 잘 하면 될듯
                 startActivity(intent);
