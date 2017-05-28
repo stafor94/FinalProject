@@ -48,12 +48,11 @@
             android:id="@+id/btn_spread"
             android:layout_width="match_parent"
             android:layout_height="36dp"
+            android:layout_marginBottom="2dp"
             android:layout_weight="1"
             android:background="#24839b"
             android:text="층 수▽"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="2dp"
-            />
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
@@ -65,7 +64,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:scaleType="fitXY"
             android:visibility="gone"
             app:srcCompat="@drawable/build_art" />

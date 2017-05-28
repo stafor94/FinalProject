@@ -26,6 +26,12 @@ public class SeekActivity extends AppCompatActivity {
     String rooms[] = new String[10];
     DBHelper dbHelper;
 
+    int count;  //건물 층수
+
+
+
+    int sectionItImage[] = {R.drawable.it_1,R.drawable.it_2, R.drawable.it_3,R.drawable.it_4,R.drawable.it_5, R.drawable.it_6};   //it 건물 단면도
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,22 @@ public class SeekActivity extends AppCompatActivity {
         dbHelper = new DBHelper(this);
 
         setUp();
+
+        switch (building)       //메인에서 누른 건물에 따라 기본 단면도 이미지 설정.
+        {
+            case  "IT대학":
+                imageView.setImageResource(sectionItImage[0]);
+            break;
+        }
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ImageActivity.class);
+                intent.putExtra("img", sectionItImage[5]);      // << 이부분을 잘 하면 될듯
+                startActivity(intent);
+            }
+        });
     }
 
     public void setUp() {
@@ -107,7 +129,7 @@ public class SeekActivity extends AppCompatActivity {
     }
 
     public void createButtons(int first, int last) {
-        int count = 0;
+        count = 0;
         for (int i = first; i <= last; i++) {
             floorBtns[count] = new Button(this);
             if (i < 0) {
@@ -119,9 +141,17 @@ public class SeekActivity extends AppCompatActivity {
                 floorBtns[count].setText(Integer.toString(i));
             }
             layout.addView(floorBtns[count]);
+           final int finalCount = count;
+
+
             floorBtns[count].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    if(building.equals("IT대학")) {
+                        imageView.setImageResource(sectionItImage[finalCount]); //층수 누를때마다 단면도 바뀌게
+                    }
+
                     floor = ((Button)v).getText().toString();
                     floorTv.setText(building + " " + floor + "F");
 
