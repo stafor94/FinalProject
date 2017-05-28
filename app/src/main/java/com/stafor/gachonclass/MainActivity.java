@@ -10,6 +10,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     RecentFragment recentFrag;
     SettingsFragment settingsFrag;
 
+    Button btn_menu;    //mainActivity 우측상단 프로필버튼
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);   // 메서드를 사용해 액션바로 설정
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
+
 
         // 앱 실행 시 홈 화면을 보여준다
         campusFrag = new CampusFragment();
