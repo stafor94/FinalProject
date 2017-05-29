@@ -15,14 +15,19 @@ import android.widget.GridLayout;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ClassFragment extends Fragment {
     GridLayout layout;
-    String building, floor, classRoom;
-    Button[] buttons;
+    int floor;
+    String building, classRoom, time;
     AlertDialog.Builder builder;
     SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    DBHelper_Recent dbHelper;
+    ArrayList<SeekList> list = new ArrayList<>();
+    DBHelper_ClassRoom dbHelper_classRoom;
+
     public static final String gachonTel = "031-750-5151";  //가천관 번호
     public static final String visionTel = "031-750-5551";  //비전타워 번호
     public static final String lawTel = "031-750-8621";  //법과대학 번호
@@ -32,10 +37,6 @@ public class ClassFragment extends Fragment {
     public static final String medicineTel = "031-750-5401"; //한의학
     public static final String artTel = "031-750-5851"; //예술대
     public static final String englishTel = "031-750-5114";  //학교번호
-    String time;
-
-    DBHelper_Recent dbHelper;
-
     final String[] items = {"수업정보 조회", "시간표 조회", "알림설정", "예약문의"};
 
     @Nullable
@@ -44,6 +45,8 @@ public class ClassFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_class, container, false);
         layout = (GridLayout) rootView.findViewById(R.id.layout);
         dbHelper = new DBHelper_Recent(getContext());
+        dbHelper_classRoom = new DBHelper_ClassRoom(getContext());
+
         init();
 
         // 다이어로그 생성 밑 설정
@@ -53,7 +56,7 @@ public class ClassFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getContext(), items[which] + " 선택!", Toast.LENGTH_SHORT).show();
-                if(which ==3 && building.equals("IT대학")){
+                if(which == 3 && building.equals("IT대학")){
                     Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" +itTel));
                     startActivity(callIntent);
                 }
@@ -65,31 +68,45 @@ public class ClassFragment extends Fragment {
 
     public void init() {
         Bundle bundle = getArguments();
-
         if (bundle != null) {
             // 건물 이름과 층수를 받아온다.
             building = bundle.getString("building");
-            floor = bundle.getString("floor");
+            floor = bundle.getInt("floor");
+            createClassRoom();
+        }
+    }
 
-            buttons = new Button[13];
-            for (int i = 0; i < 13; i++) {
-                buttons[i] = new Button(getContext());
-                buttons[i].setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        classRoom = ((Button)v).getText().toString();
-                        builder.setTitle(building + " "+ floor + "F " + classRoom + "호");
-                        builder.show();
-                        time = sdfNow.format(new Date(System.currentTimeMillis()));
-                        dbHelper.insert(building, floor, classRoom, time);
-                    }
-                });
-                if (i  < 9) // 1 ~ 9 호
-                    buttons[i].setText(floor + "0" + (i+1));
-                else        // 10 ~ 호
-                    buttons[i].setText(floor + (i+1));
-                layout.addView(buttons[i]);
-            }
+    public void createClassRoom() {
+        String mClassRoom;
+        for(int i = 0; i < dbHelper_classRoom.checkFloor(floor); i++) {
+            mClassRoom = dbHelper_classRoom.printData(i, floor);   // 강의실 호
+            Button btn = new Button(getContext());
+            btn.setText(mClassRoom);
+            btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    classRoom = ((Button)v).getText().toString();
+                    builder.setTitle(building + " "+ floor + "F " + classRoom + "호");
+                    builder.show();
+                    time = sdfNow.format(new Date(System.currentTimeMillis()));
+                    dbHelper.insert(building, Integer.toString(floor), classRoom, time);
+                }
+            });
+            list.add(new SeekList(btn, building, floor, classRoom));
+            layout.addView(btn);
+        }
+    }
+
+    class SeekList {
+        Button button;
+        int floor;
+        String building, classRoom;
+
+        public SeekList(Button button, String building, int floor, String classRoom) {
+            this.button = button;
+            this.building = building;
+            this.floor = floor;
+            this.classRoom = classRoom;
         }
     }
 }

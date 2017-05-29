@@ -15,16 +15,14 @@ import android.widget.TextView;
 public class SeekActivity extends AppCompatActivity {
     Fragment fragment;
     Button spreadBtn, spread2Btn;
-    Button[] floorBtns = new Button[15];
     GridLayout layout;
     ImageView imageView;
     TextView floorTv;
 
-    String floor = "1", building;
+    int floor = 1;
+    String building;
+    Button[] floorBtns = new Button[15];
     boolean[] isSpeard = {true, false};
-
-    String rooms[] = new String[10];
-    DBHelper dbHelper;
 
     int count;  //건물 층수
     int select; // 선택한 층수
@@ -38,10 +36,7 @@ public class SeekActivity extends AppCompatActivity {
         setContentView(R.layout.activity_seek);
         this.setFinishOnTouchOutside(false); // 바깥영역 터치로 인한 종료 방지
 
-        dbHelper = new DBHelper(this);
-
         setUp();
-
         switch (building)       //메인에서 누른 건물에 따라 기본 단면도 이미지 설정.
         {
             case  "IT대학":
@@ -64,8 +59,6 @@ public class SeekActivity extends AppCompatActivity {
         building = myIntent.getStringExtra("building");
         floorTv.setText(building + " " + floor + "F");
         createFloors(building);
-
-        rooms = dbHelper.select(Integer.parseInt(floor));
     }
 
     View.OnClickListener myListener = new View.OnClickListener() {
@@ -91,7 +84,7 @@ public class SeekActivity extends AppCompatActivity {
                 isSpeard[1] = !isSpeard[1];
             } else if (v.getId() == R.id.imageView && building.equals("IT대학")) {
                 Intent intent = new Intent(getApplicationContext(), ImageActivity.class);
-                intent.putExtra("img", sectionItImage[select]);      // << 이부분을 잘 하면 될듯
+                intent.putExtra("img", sectionItImage[select]);
                 startActivity(intent);
             }
         }
@@ -101,7 +94,7 @@ public class SeekActivity extends AppCompatActivity {
         if (building.equals("가천관"))
             createButtons(-3, 7);
         else if (building.equals("비전타워"))
-            createButtons(-3, 3);
+            createButtons(1, 6);
         else if (building.equals("공과대학1"))
             createButtons(1, 5);
         else if (building.equals("공과대학2"))
@@ -111,7 +104,7 @@ public class SeekActivity extends AppCompatActivity {
         else if(building.equals("법과대학"))
             createButtons(1, 6);
         else if(building.equals("IT대학"))
-            createButtons(1, 6);
+            createButtons(2, 6);
         else if(building.equals("한의과대학"))
             createButtons(1, 5);
         else if(building.equals("예술대학1"))
@@ -125,10 +118,10 @@ public class SeekActivity extends AppCompatActivity {
     public void createButtons(int first, int last) {
         count = 0;
         for (int i = first; i <= last; i++) {
+            floorBtns[count] = new Button(this);
+
             if (i == 0) // 0층은 없다
                 continue;
-
-            floorBtns[count] = new Button(this);
             if (i < 0) {
                 floorBtns[count].setText("B" + Integer.toString(-i));   // 지하
             } else if (i > 0) { // 지상
@@ -139,24 +132,29 @@ public class SeekActivity extends AppCompatActivity {
             floorBtns[count].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(building.equals("IT대학")) {
-                        select = Integer.parseInt(((Button)v).getText().toString()) - 1;    // [] 0 ~ 5
-                        imageView.setImageResource(sectionItImage[select]); //층수 누를때마다 단면도 바뀌게
+                    if (((Button)v).getText().toString().charAt(0) == 'B') {  // 지하인지 지상인지 구분
+                        floor = (((Button) v).getText().toString().charAt(1)) - 48; // 아스키코드값
+                        floorTv.setText(building + " B" + floor + "F");
                     }
+                    else {
+                        floor = (((Button) v).getText().toString().charAt(0)) - 48;
+                        floorTv.setText(building + " " + floor + "F");
+                    }
+                    if(building.equals("IT대학")) {
+                        select = Integer.parseInt(((Button) v).getText().toString()) - 1;    // [] 0 ~ 5
+                        imageView.setImageResource(sectionItImage[select]); //층수 누를때마다 단면도 바뀌게
 
-                    floor = ((Button)v).getText().toString();
-                    floorTv.setText(building + " " + floor + "F");
-
-                    fragment = new ClassFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString("building", building);
-                    bundle.putString("floor", floor);
-
-                    fragment.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
+                        fragment = new ClassFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString("building", building);
+                        bundle.putInt("floor", floor);
+                        fragment.setArguments(bundle);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
+                    }
                 }
             });
             count++;
         }
     }
+
 }
