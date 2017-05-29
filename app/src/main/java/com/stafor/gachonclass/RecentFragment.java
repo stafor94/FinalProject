@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +15,10 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class RecentFragment extends Fragment implements View.OnClickListener{
     LinearLayout layout, layout_bottom;
-    SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
     String time, floor, building, classRoom, id;
     ArrayList<RecentList> list = new ArrayList<>();
     Button modifyBtn, removeBtn, cancelBtn;
@@ -76,6 +73,25 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
         return rootView;
     }
 
+    public void initData() {
+        int count = dbHelper.checkTableCount(); // table 내의 행 개수를 받아온다
+        try {
+            for (int i = 0; i < count; i++) {
+                id = dbHelper.printData(i, 0);
+                building = dbHelper.printData(i, 1);
+                floor = dbHelper.printData(i, 2);
+                classRoom = dbHelper.printData(i, 3);
+                time = dbHelper.printData(i, 4);
+
+                if (!building.equals(""))
+                    addButton(building, floor, classRoom, time, id);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void addButton(String building, String floor, String classRoom, String time, String id) {
         Button button = new Button(getContext()); // 버튼 생성
         CheckBox chk_box = new CheckBox(getContext());  // 체크박스 생성
@@ -90,8 +106,7 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
 
         list.add(new RecentList(layout_line, button, chk_box, building, floor, classRoom, time, Integer.parseInt(id)));  // 어레이리스트에 버튼과 체크박스 추가
         button.setId(Integer.parseInt(id));
-        Log.e("ggg", Integer.parseInt(id) + "]");
-        chk_box.setVisibility(View.INVISIBLE);  // 체크박스 숨기기
+        chk_box.setVisibility(View.GONE);  // 체크박스 숨기기
         // 레이아웃에 위젯 부착
         layout_line.addView(chk_box);
         layout_line.addView(button);
@@ -101,26 +116,22 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_modify) { // 수정버튼
-            if (onModify) {
-                layout_bottom.setVisibility(View.GONE);
-                modifyBtn.setVisibility(View.VISIBLE);
-                for (int i = 0; i < list.size(); i++)
-                    list.get(i).chk_box.setVisibility(View.INVISIBLE);
-            } else {
                 layout_bottom.setVisibility(View.VISIBLE);
                 modifyBtn.setVisibility(View.GONE);
-                for (int i = 0; i < list.size(); i++)
+                for (int i = 0; i < list.size(); i++) {
                     list.get(i).chk_box.setVisibility(View.VISIBLE);
-            }
-
-            onModify = !onModify;
+                    list.get(i).button.setClickable(false);
+                }
+                onModify = true;
         } else if (v.getId() == R.id.btn_ok) {  // 삭제버튼
             removeRecent();
         } else if (v.getId() == R.id.btn_cancel) {  // 취소버튼
             layout_bottom.setVisibility(View.GONE);
             modifyBtn.setVisibility(View.VISIBLE);
-            for (int i = 0; i < list.size(); i++)
-                list.get(i).chk_box.setVisibility(View.INVISIBLE);
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).chk_box.setVisibility(View.GONE);
+                list.get(i).button.setClickable(true);
+            }
             onModify = false;
         } else if (!onModify){  // 편집 중이 아니면
             for (int i = 0; i < list.size(); i++) {  // 모든 리스트를 비교하며
@@ -143,25 +154,6 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
                 list.get(i).layout.setVisibility(View.GONE);
                 list.remove(i--);   // 리스트에서 삭제 후 이전 i로 돌아간다
             }
-        }
-    }
-
-    public void initData() {
-        int count = dbHelper.checkTableCount(); // table 내의 행 개수를 받아온다
-        try {
-            for (int i = 0; i < count; i++) {
-                id = dbHelper.printData(i, 0);
-                building = dbHelper.printData(i, 1);
-                floor = dbHelper.printData(i, 2);
-                classRoom = dbHelper.printData(i, 3);
-                time = dbHelper.printData(i, 4);
-
-                if (!building.equals(""))
-                    addButton(building, floor, classRoom, time, id);
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

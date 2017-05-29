@@ -40,7 +40,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"
             android:columnCount="4"
-            android:visibility="gone">
+            android:visibility="visible">
 
         </GridLayout>
 
@@ -51,7 +51,7 @@
             android:layout_marginBottom="2dp"
             android:layout_weight="1"
             android:background="#24839b"
-            android:text="층 수▽"
+            android:text="층수△"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>

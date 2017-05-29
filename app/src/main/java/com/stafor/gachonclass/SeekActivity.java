@@ -21,7 +21,7 @@ public class SeekActivity extends AppCompatActivity {
     TextView floorTv;
 
     String floor = "1", building;
-    boolean[] isSpeard = {false, false};
+    boolean[] isSpeard = {true, false};
 
     String rooms[] = new String[10];
     DBHelper dbHelper;
