@@ -29,6 +29,8 @@ public class ClassFragment extends Fragment {
     String artTel = "031-750-5851"; //예술대
     String englishTel = "031-750-5114";  //학교번호
 
+    DBHelper_Recent dbHelper;
+
     final String[] items = {"수업정보 조회", "시간표 조회", "알림설정", "예약문의"};
 
     @Nullable
@@ -36,6 +38,7 @@ public class ClassFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_class, container, false);
         layout = (GridLayout) rootView.findViewById(R.id.layout);
+        dbHelper = new DBHelper_Recent(getContext());
         init();
 
         // 다이어로그 생성 밑 설정
@@ -72,6 +75,7 @@ public class ClassFragment extends Fragment {
                         classRoom = ((Button)v).getText().toString();
                         builder.setTitle(building + " "+ floor + "F " + classRoom + "호");
                         builder.show();
+                        dbHelper.insert(building, classRoom);
                     }
                 });
                 if (i  < 9) // 1 ~ 9 호
