@@ -15,7 +15,7 @@ public class DBHelper_Recent extends SQLiteOpenHelper {
     // Database name
     private static final String DATABASE_NAME = "Recent.db";
     // Database version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 5;
     // Table name
     private static final String TABLE_NAME = "recentTable";
 
@@ -33,7 +33,7 @@ public class DBHelper_Recent extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         /* 테이블을 생성하기 위해 sql문으로 작성하여 execSQL 문 실행 */
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "( _id INTEGER PRIMARY KEY AUTOINCREMENT, building TEXT, classroom TEXT);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "( _id INTEGER PRIMARY KEY AUTOINCREMENT, building TEXT, floor TEXT, classroom TEXT, time TEXT);");
     }
 
      /* 데이터베이스 Version Upgrade
@@ -49,10 +49,10 @@ public class DBHelper_Recent extends SQLiteOpenHelper {
     }
 
     // 테이블의 레코드 insert
-    public void insert(String building, String classroom) {
+    public void insert(String building, String floor, String classroom, String time) {
         db = getWritableDatabase();
 
-        db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES(null, '" + building +  "', '" + classroom + "');");
+        db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES(null, '" + building +  "', '" + floor + "', '" + classroom + "', '" + time + "');");
         db.close();
     }
 
@@ -70,13 +70,35 @@ public class DBHelper_Recent extends SQLiteOpenHelper {
         String str="";
 
         cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + ";", null);
+        cursor.moveToFirst();
+        for (int i = 0; i < position; i++)  // position 만큼 커서를 이동
+            cursor.moveToNext();
 
-        if (cursor.moveToPosition(position) == false) {
+        if (cursor.isAfterLast()) {
             str = "";
+        } else if (index == 0) {
+            str += Integer.toString(cursor.getInt(index));
         } else {
             str += cursor.getString(index);
         }
         cursor.close();
         return str;
+    }
+
+    public int checkTableCount() {
+        int count = 0;
+        db = getReadableDatabase();
+        cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + ";", null);
+        cursor.moveToFirst();
+
+        if (cursor.getColumnCount() == 0)
+            count = 0;
+        else {
+            count++;
+            while (cursor.moveToNext())
+                count++;
+        }
+
+        return count;
     }
 }

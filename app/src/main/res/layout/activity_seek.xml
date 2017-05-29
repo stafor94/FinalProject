@@ -67,7 +67,7 @@
             android:layout_height="200dp"
             android:scaleType="fitXY"
             android:visibility="gone"
-            app:srcCompat="@drawable/build_art" />
+            app:srcCompat="@drawable/biglogo" />
 
         <Button
             android:id="@+id/btn_spread2"

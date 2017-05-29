@@ -14,20 +14,25 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class ClassFragment extends Fragment {
     GridLayout layout;
     String building, floor, classRoom;
     Button[] buttons;
     AlertDialog.Builder builder;
-    String gachonTel = "031-750-5151";  //가천관 번호
-    String visionTel = "031-750-5551";  //비전타워 번호
-    String lawTel = "031-750-8621";  //법과대학 번호
-    String engineeringTel = "031-750-5271"; //공과대학
-    String nanoTel = "031-750-5381"; //바이오나노
-    String itTel = "031-750-5661";
-    String medicineTel = "031-750-5401"; //한의학
-    String artTel = "031-750-5851"; //예술대
-    String englishTel = "031-750-5114";  //학교번호
+    SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    public static final String gachonTel = "031-750-5151";  //가천관 번호
+    public static final String visionTel = "031-750-5551";  //비전타워 번호
+    public static final String lawTel = "031-750-8621";  //법과대학 번호
+    public static final String engineeringTel = "031-750-5271"; //공과대학
+    public static final String nanoTel = "031-750-5381"; //바이오나노
+    public static final String itTel = "031-750-5661";
+    public static final String medicineTel = "031-750-5401"; //한의학
+    public static final String artTel = "031-750-5851"; //예술대
+    public static final String englishTel = "031-750-5114";  //학교번호
+    String time;
 
     DBHelper_Recent dbHelper;
 
@@ -75,7 +80,8 @@ public class ClassFragment extends Fragment {
                         classRoom = ((Button)v).getText().toString();
                         builder.setTitle(building + " "+ floor + "F " + classRoom + "호");
                         builder.show();
-                        dbHelper.insert(building, classRoom);
+                        time = sdfNow.format(new Date(System.currentTimeMillis()));
+                        dbHelper.insert(building, floor, classRoom, time);
                     }
                 });
                 if (i  < 9) // 1 ~ 9 호
