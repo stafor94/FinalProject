@@ -11,21 +11,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * Created by 황우상 on 2017-05-29.
- */
-
-public class DBHelper_ClassRoom extends SQLiteOpenHelper {
+public class DBHelper_TimeTable extends SQLiteOpenHelper {
     public static final String ROOT_DIR = "/data/data/com.stafor.gachonclass/databases/";  //로컬db 저장
-    private static final String DATABASE_NAME = "CLASSROOMS.db"; //로컬db명
-    private static final String TABLE_NAME = "classrooms";
-    private static final String FILE_NAME = "CLASSROOMS.db";
+    private static final String DATABASE_NAME = "CLASS.db"; //로컬db명
+    private static final String TABLE_NAME = "ITtable";
+    private static final String FILE_NAME = "CLASS.db";
     private static final int SCHEMA_VERSION = 1; //로컬db 버전
+
 
     SQLiteDatabase db;
     Cursor cursor;
 
-    public DBHelper_ClassRoom(Context context)    {
+    public DBHelper_TimeTable(Context context)    {
         super(context, DATABASE_NAME, null, SCHEMA_VERSION);
         setDB(context); // setDB에 context 부여
     }
@@ -66,26 +63,28 @@ public class DBHelper_ClassRoom extends SQLiteOpenHelper {
     }
 
     // 메인페이지 텍스트뷰 출력하기 위한 printdata
-    public String printData(int index, int floor) {
+    public String printData(String day, String classRoom, int index, int field) {
         db = getReadableDatabase();
         String str = "";
+        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE DAY = '" + day + "' AND CLASS = '" + classRoom + "'";
 
-        cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE FLOOR = " + floor + ";", null);
+        cursor = db.rawQuery(QUERY, null);
         cursor.moveToFirst();
 
         for (int i = 0; i < index; i++)
             cursor.moveToNext();
 
-        str += cursor.getString(1);
+        str += cursor.getString(field);
 
         cursor.close();
         return str;
     }
 
-    public int checkFloor(int floor) {
+    public int checkClassRoom(String day, String classRoom) {
         int count = 0;
         db = getReadableDatabase();
-        cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE FLOOR = " + floor + ";", null);
+        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE DAY = '" + day + "' AND CLASS = '" + classRoom + "'";
+        cursor = db.rawQuery(QUERY, null);
         cursor.moveToFirst();
 
         if (cursor.getColumnCount() == 0)

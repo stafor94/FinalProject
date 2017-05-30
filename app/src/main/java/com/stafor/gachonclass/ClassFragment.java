@@ -56,6 +56,12 @@ public class ClassFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(getContext(), items[which] + " 선택!", Toast.LENGTH_SHORT).show();
+                if (which == 1 && building.equals("IT대학")) {
+                    Intent myIntent = new Intent(getContext(), TimeTableActivity.class);
+                    myIntent.putExtra("classroom", classRoom);
+                    myIntent.putExtra("building", building);
+                    startActivity(myIntent);
+                }
                 if(which == 3 && building.equals("IT대학")){
                     Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" +itTel));
                     startActivity(callIntent);
