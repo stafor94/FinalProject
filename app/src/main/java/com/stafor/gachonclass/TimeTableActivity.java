@@ -20,7 +20,7 @@ public class TimeTableActivity extends AppCompatActivity {
     final int PROFESSOR = 6;
     final int MAJOR = 7;
     String building, classRoom;
-    String[] days = { "월", "화", "수", "목", "금" };
+    String[] days = { "mon", "tue", "wed", "thu", "fri" };
 
     DBHelper_TimeTable dbHelper;
     @Override

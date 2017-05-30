@@ -67,14 +67,10 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
     public String printData(String day, String classRoom, int index, int field) {
         db = getReadableDatabase();
         String str = "";
-        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE DAY = '" + day + "' AND CLASS = '" + classRoom + "'";
+        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE DAY = '" + day + "' AND CLASS = '" + classRoom + "';";
 
         cursor = db.rawQuery(QUERY, null);
-        cursor.moveToFirst();
-
-        for (int i = 0; i < index; i++)
-            cursor.moveToNext();
-
+        cursor.moveToPosition(index);
         try {
             str += cursor.getString(field);
         } catch (Exception e) {
@@ -90,7 +86,8 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
         db = getReadableDatabase();
         String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE DAY = '" + day + "' AND CLASS = '" + classRoom + "';";
         cursor = db.rawQuery(QUERY, null);
-        Log.e("ggg", day +"||" + classRoom);
+
+        Log.e("ggg", day +"|" + classRoom);
 
         count = cursor.getCount();
 
