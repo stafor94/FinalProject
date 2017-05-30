@@ -74,7 +74,11 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
         for (int i = 0; i < index; i++)
             cursor.moveToNext();
 
-        str += cursor.getString(field);
+        try {
+            str += cursor.getString(field);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         cursor.close();
         return str;
