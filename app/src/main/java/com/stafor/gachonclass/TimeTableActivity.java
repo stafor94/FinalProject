@@ -8,8 +8,10 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import static com.stafor.gachonclass.R.id.layout_mon;
+
 public class TimeTableActivity extends AppCompatActivity {
-    LinearLayout layout_mon, layout_tue, layout_wed, layout_thu, layout_fri;
+    LinearLayout[] layout = new LinearLayout[5];
     final int CLASS = 1;
     final int DAY = 2;
     final int START = 3;
@@ -18,6 +20,7 @@ public class TimeTableActivity extends AppCompatActivity {
     final int PROFESSOR = 6;
     final int MAJOR = 7;
     String building, classRoom;
+    String[] days = { "월", "화", "수", "목", "금" };
 
     DBHelper_TimeTable dbHelper;
     @Override
@@ -31,20 +34,17 @@ public class TimeTableActivity extends AppCompatActivity {
     }
 
     public void init() {
-        layout_mon = (LinearLayout) findViewById(R.id.layout_mon);
-        layout_tue = (LinearLayout) findViewById(R.id.layout_tue);
-        layout_wed = (LinearLayout) findViewById(R.id.layout_wed);
-        layout_thu = (LinearLayout) findViewById(R.id.layout_thu);
-        layout_fri = (LinearLayout) findViewById(R.id.layout_fri);
+        layout[0] = (LinearLayout) findViewById(layout_mon);
+        layout[1] = (LinearLayout) findViewById(R.id.layout_tue);
+        layout[2] = (LinearLayout) findViewById(R.id.layout_wed);
+        layout[3] = (LinearLayout) findViewById(R.id.layout_thu);
+        layout[4] = (LinearLayout) findViewById(R.id.layout_fri);
 
-        fillTable("월");
-        fillTable("화");
-        fillTable("수");
-        fillTable("목");
-        fillTable("금");
+        for (int i = 0; i < 5; i++) // 월 ~ 금 테이블을 채운다.
+            fillTable(i);
     }
 
-    public void fillTable(String day) {
+    public void fillTable(int index) {
         int tableSize;
         float padding;
         String start, end;
@@ -52,19 +52,22 @@ public class TimeTableActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         building = myIntent.getStringExtra("building");
         classRoom = myIntent.getStringExtra("classroom");
+        Log.e("dd", building + "  " + classRoom);
 
-        tableSize = dbHelper.checkClassRoom(day, classRoom);
+        tableSize = dbHelper.checkClassRoom(days[index], classRoom);
+        Log.e("table", "tableSize = " + tableSize);
         for (int i = 0; i < tableSize; i++) {
             TextView tv = new TextView(this);
-            tv.setText(dbHelper.printData(day, classRoom, i, SUBJECT));
-            start = dbHelper.printData(day, classRoom, i, START);
-            end = dbHelper.printData(day, classRoom, i, END);
-            if (start.equals("") || end.equals("")) {
-                Log.e("dbError", "start or end = \"\"");
-            }
-            padding = convert(end) - convert(start);
-            tv.setPadding(0, (int) (padding * 20.0f), 0, (int) (padding * 20.0f));
-            layout_mon.addView(tv);
+            tv.setText(dbHelper.printData(days[index], classRoom, i, SUBJECT));
+            start = dbHelper.printData(days[index], classRoom, i, START);
+            end = dbHelper.printData(days[index], classRoom, i, END);
+            Log.e("log", "start = " + start);
+
+            padding = convert(end) - convert(start);    // 시간의 길이를 구한다
+            Log.e("log", "padding = " + padding);
+            tv.setPadding(0, (int) (padding * 20.0f), 0, (int) (padding * 20.0f));  // 상,하 padding 설정
+
+            layout[index].addView(tv);  // 요일 레이아웃에 부착
         }
     }
 

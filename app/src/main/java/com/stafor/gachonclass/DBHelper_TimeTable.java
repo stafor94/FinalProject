@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -87,17 +88,12 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
     public int checkClassRoom(String day, String classRoom) {
         int count = 0;
         db = getReadableDatabase();
-        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE DAY = '" + day + "' AND CLASS = '" + classRoom + "'";
+        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE DAY = '" + day + "' AND CLASS = '" + classRoom + "';";
         cursor = db.rawQuery(QUERY, null);
-        cursor.moveToFirst();
+        Log.e("ggg", day +"||" + classRoom);
 
-        if (cursor.getColumnCount() == 0)
-            count = 0;
-        else {
-            count++;
-            while (cursor.moveToNext())
-                count++;
-        }
+        count = cursor.getCount();
+
         return count;
     }
 
