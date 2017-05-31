@@ -5,4 +5,11 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorGray">#000000</color>
     <color name="colorWhile">#FFFFFF</color>
+    <color name="colorDarkGreen">#29B629</color>
+    <color name="colorLightGreen">#4BC74B</color>
+    <color name="colorPink">#C34B4D</color>
+    <color name="colorPurple">#C14BC3</color>
+    <color name="colorDarkBlue">#1865AE</color>
+    <color name="colorLightBlue">#4B89C3</color>
+    <color name="colorYellow">#F2C602</color>
 </resources>

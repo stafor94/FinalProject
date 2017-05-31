@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
 
-
         // 앱 실행 시 홈 화면을 보여준다
         campusFrag = new CampusFragment();
         recentFrag = new RecentFragment();
