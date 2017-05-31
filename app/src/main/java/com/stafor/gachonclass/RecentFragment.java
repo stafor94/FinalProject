@@ -21,7 +21,7 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
     LinearLayout layout, layout_bottom;
     String time, floor, building, classRoom, id;
     ArrayList<RecentList> list = new ArrayList<>();
-    Button modifyBtn, removeBtn, cancelBtn;
+    Button modifyBtn, allBtn, removeBtn, cancelBtn;
     boolean onModify;
     AlertDialog.Builder builder;
     final String[] items = {"수업정보 조회", "시간표 조회", "알림설정", "예약문의"};
@@ -38,9 +38,11 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
         layout = (LinearLayout) rootView.findViewById(R.id.layout_btns);
         layout_bottom = (LinearLayout) rootView.findViewById(R.id.layout_bottom);
         modifyBtn = (Button) rootView.findViewById(R.id.btn_modify);
+        allBtn = (Button) rootView.findViewById(R.id.btn_all);
         removeBtn = (Button) rootView.findViewById(R.id.btn_ok);
         cancelBtn = (Button) rootView.findViewById(R.id.btn_cancel);
         modifyBtn.setOnClickListener(this);
+        allBtn.setOnClickListener(this);
         removeBtn.setOnClickListener(this);
         cancelBtn.setOnClickListener(this);
 
@@ -123,7 +125,11 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
                     list.get(i).button.setClickable(false);
                 }
                 onModify = true;
-        } else if (v.getId() == R.id.btn_ok) {  // 삭제버튼
+        } else if (v.getId() == R.id.btn_all) {
+            for (int i = 0; i < list.size(); i++) {
+                list.get(i).chk_box.setChecked(true);
+            }
+        }else if (v.getId() == R.id.btn_ok) {  // 삭제버튼
             removeRecent();
         } else if (v.getId() == R.id.btn_cancel) {  // 취소버튼
             layout_bottom.setVisibility(View.GONE);

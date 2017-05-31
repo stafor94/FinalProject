@@ -84,7 +84,7 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
     public int checkClassRoom(String day, String classRoom) {
         int count = 0;
         db = getReadableDatabase();
-        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE DAY = '" + day + "' AND CLASS = '" + classRoom + "';";
+        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE (DAY = '" + day + "') AND (CLASS = '" + classRoom + "');";
         cursor = db.rawQuery(QUERY, null);
 
         Log.e("ggg", day +"|" + classRoom);
