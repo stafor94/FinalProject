@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -25,6 +24,7 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
     int colorIndex = 0;
     int[] colors = {R.color.colorLightGreen, R.color.colorLightBlue, R.color.colorPink,
                     R.color.colorYellow, R.color.colorPurple, R.color.colorDarkGreen, R.color.colorDarkBlue};
+    boolean isFirst = false;
 
     ArrayList<TimeList> list = new ArrayList<>();
     AlertDialog.Builder builder;
@@ -59,6 +59,7 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
         building = myIntent.getStringExtra("building");
         classRoom = myIntent.getStringExtra("classroom");
 
+        isFirst = false;
         makeClass(index);
         tableSize = dbHelper.checkClassRoom(days[index], classRoom);
         for (int i = 0; i < tableSize; i++) {
@@ -141,10 +142,10 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void changeParam(Button preBtn, Button btn, Button nextBtn, String time) {
-        Log.e("AA", "chageParam() 호출됨");
         LinearLayout.LayoutParams param;
 
         if (time.equals("A")) {
+            isFirst = true;
             param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     150 + 75, 0);
             param.setMargins(0, 75, 0, 0);
@@ -154,18 +155,20 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
             param.setMargins(0, 0, 0, 0);
             nextBtn.setLayoutParams(param);
         } else if (time.equals("B")) {
-            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    0, 0);
-            preBtn.setLayoutParams(param);
+            if (!list.contains(preBtn)) {
+                param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                        0, 0);
+                preBtn.setLayoutParams(param);
+            }
+
             param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     150 + 75, 0);
-            param.setMargins(0, 0, 0, 0);
-
-            for (int i = 0; i < list.size(); i++)
-                if (list.get(i).btn == preBtn && preBtn.getText().toString().equals(""))
-                    param.setMargins(0, 150, 0, 0);
-
+            if (!isFirst)
+                param.setMargins(0, 150, 0, 0);
+            else
+                param.setMargins(0, 0, 0, 0);
             btn.setLayoutParams(param);
+
             param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                     150 - 75, 0);
             param.setMargins(0, 0, 0, 0);
@@ -175,7 +178,7 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
                     150 + 75, 0);
             param.setMargins(0, 0, 0, 0);
             for (int i = 0; i < list.size(); i++)
-                if (list.get(i).btn == preBtn && !list.get(i).end.equals("B"))
+                if (list.get(i).btn == preBtn && !list.get(i).end.equals("B") && !list.get(i).start.equals("B"))
                     param.setMargins(0, 75, 0, 0);
             btn.setLayoutParams(param);
             param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
