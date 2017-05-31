@@ -1,10 +1,12 @@
 package com.stafor.gachonclass;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ public class TimeTableActivity extends AppCompatActivity {
     final int MAJOR = 7;
     String building, classRoom;
     String[] days = { "mon", "tue", "wed", "thu", "fri" };
+    int[] colors = {Color.RED, Color.YELLOW, Color.GREEN, Color.BLUE, Color.GRAY};
 
     DBHelper_TimeTable dbHelper;
     @Override
@@ -52,20 +55,20 @@ public class TimeTableActivity extends AppCompatActivity {
         Intent myIntent = getIntent();
         building = myIntent.getStringExtra("building");
         classRoom = myIntent.getStringExtra("classroom");
-        Log.e("dd", building + "  " + classRoom);
+        Log.e("dd", "[" + building + "][" + classRoom + "]");
 
         tableSize = dbHelper.checkClassRoom(days[index], classRoom);
-        Log.e("table", "tableSize = " + tableSize);
         for (int i = 0; i < tableSize; i++) {
             TextView tv = new TextView(this);
+            tv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT));
             tv.setText(dbHelper.printData(days[index], classRoom, i, SUBJECT));
+            tv.setBackgroundColor(colors[i]);
             start = dbHelper.printData(days[index], classRoom, i, START);
             end = dbHelper.printData(days[index], classRoom, i, END);
-            Log.e("log", "start = " + start);
 
             padding = convert(end) - convert(start);    // 시간의 길이를 구한다
-            Log.e("log", "padding = " + padding);
-            tv.setPadding(0, (int) (padding * 20.0f), 0, (int) (padding * 20.0f));  // 상,하 padding 설정
+            tv.setPadding(0, (int) (padding * 50.0f), 0, (int) (padding * 150.0f));  // 상,하 padding 설정
 
             layout[index].addView(tv);  // 요일 레이아웃에 부착
         }

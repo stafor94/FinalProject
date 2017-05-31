@@ -5,7 +5,6 @@ import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -17,15 +16,16 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "CLASS.db"; //로컬db명
     private static final String TABLE_NAME = "ITtable";
     private static final String FILE_NAME = "CLASS.db";
-    private static final int SCHEMA_VERSION = 1; //로컬db 버전
-
+    private static final int SCHEMA_VERSION = 7; //로컬db 버전
 
     SQLiteDatabase db;
     Cursor cursor;
+    Context context;
 
     public DBHelper_TimeTable(Context context)    {
         super(context, DATABASE_NAME, null, SCHEMA_VERSION);
         setDB(context); // setDB에 context 부여
+        this.context = context;
     }
 
     @Override
@@ -34,6 +34,8 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        context.deleteDatabase(DATABASE_NAME);
+        setDB(context);
     }
 
     public static void setDB(Context ctx) {
@@ -82,15 +84,13 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
     }
 
     public int checkClassRoom(String day, String classRoom) {
-        int count = 0;
+        int count;
         db = getReadableDatabase();
-        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE (DAY = '" + day + "') AND (CLASS = '" + classRoom + "');";
+        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE DAY = '" + day + "' AND CLASS = '" + classRoom + "';";
         cursor = db.rawQuery(QUERY, null);
-
-        Log.e("ggg", day +"|" + classRoom);
+        cursor.moveToFirst();
 
         count = cursor.getCount();
-
         return count;
     }
 
