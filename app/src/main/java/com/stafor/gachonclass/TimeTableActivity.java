@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -18,29 +17,25 @@ import static com.stafor.gachonclass.R.id.layout_mon;
 
 public class TimeTableActivity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout[] layout = new LinearLayout[5];
-    final int CLASS = 1;
-    final int DAY = 2;
-    final int START = 3;
-    final int END = 4;
-    final int SUBJECT = 5;
-    final int PROFESSOR = 6;
-    final int MAJOR = 7;
+    final int CLASS = 1, DAY = 2, START = 3, END = 4, SUBJECT = 5, PROFESSOR = 6, MAJOR = 7;
+
     String building, classRoom;
     String[] days = { "mon", "tue", "wed", "thu", "fri" };
     int colorIndex = 0;
     int[] colors = {R.color.colorLightGreen, R.color.colorLightBlue, R.color.colorPink,
                     R.color.colorYellow, R.color.colorPurple, R.color.colorDarkGreen, R.color.colorDarkBlue};
+
     ArrayList<TimeList> list = new ArrayList<>();
     AlertDialog.Builder builder;
     AlertDialog dialog;
     DBHelper_TimeTable dbHelper;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time_table);
 
         dbHelper = new DBHelper_TimeTable(this);
-
         init();
     }
 
@@ -62,10 +57,8 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
         Intent myIntent = getIntent();
         building = myIntent.getStringExtra("building");
         classRoom = myIntent.getStringExtra("classroom");
-        Log.e("dd", "[" + building + "][" + classRoom + "]");
 
         makeClass(index);
-
         tableSize = dbHelper.checkClassRoom(days[index], classRoom);
         for (int i = 0; i < tableSize; i++) {
             start = dbHelper.printData(days[index], classRoom, i, START);
@@ -131,6 +124,14 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
             result = Float.parseFloat(time);
 
         return result;
+    }
+
+    public boolean isNum(String time) {
+        if (time.equals("A") || time.equals("B") || time.equals("C") || time.equals("D")
+                || time.equals("E"))
+            return false;
+        else
+            return true;
     }
 
     @Override
