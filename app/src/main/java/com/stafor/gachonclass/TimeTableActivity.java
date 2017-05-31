@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -64,26 +65,31 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
             start = dbHelper.printData(days[index], classRoom, i, START);
             end = dbHelper.printData(days[index], classRoom, i, END);
 
-            for (int j = (int) convert(start); j <= (int) convert(end); j++) {
+            for (int j = convert(start); j <= convert(end); j++) {
                 String subject, professor, major;
                 subject = dbHelper.printData(days[index], classRoom, i, SUBJECT);
                 professor = dbHelper.printData(days[index], classRoom, i, PROFESSOR);
                 major = dbHelper.printData(days[index], classRoom, i, MAJOR);
 
-                Button btn = (Button) layout[index].findViewWithTag("btn_" + days[index] + "_" + Integer.toString(j));
+                Button preBtn = null, btn, nextBtn = null;
+                if (j != 0)
+                    preBtn = (Button) layout[index].findViewWithTag("btn_" + days[index] + "_" + Integer.toString(j-1));
+                btn = (Button) layout[index].findViewWithTag("btn_" + days[index] + "_" + Integer.toString(j));
+                if (j != 13)
+                    nextBtn = (Button) layout[index].findViewWithTag("btn_" + days[index] + "_" + Integer.toString(j+1));
+
                 btn.setBackgroundColor(getResources().getColor(colors[colorIndex]));
                 btn.setOnClickListener(this);
+                if (j == convert(start))
+                    btn.setText(subject + "\n" + professor);
 
-                if (j == (int) convert(start))
-                    btn.setText(subject);
-                if (j == (int) convert(end)) {
-                    if ((int) convert(start) == (int) convert(end))
-                        btn.setText(subject + "\n" + professor);
-                    else
-                        btn.setText(professor);
+                if (!isNum(start) && j == convert(start)) {
+                    changeParam(preBtn, btn, nextBtn, start);
+                } else if (!isNum(end) && j == convert(end)) {
+                    changeParam(preBtn, btn, nextBtn, end);
                 }
 
-                list.add(new TimeList(btn, subject, professor, major));
+                list.add(new TimeList(btn, subject, professor, major, start, end));
             }
             colorIndex++;
             if (colorIndex > colors.length - 1)
@@ -106,22 +112,22 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public float convert(String time) {
-        float result;
+    public int convert(String time) {
+        int result;
 
         if (time.equals("A"))
-            result = 1.5f;
+            result = 1;
         else if (time.equals("B")) {
-            result = 3.0f;
+            result = 3;
         } else if (time.equals("C")) {
-            result = 4.5f;
+            result = 4;
         } else if (time.equals("D")) {
-            result = 6.0f;
+            result = 6;
         } else if (time.equals("E")) {
-            result = 7.5f;
+            result = 7;
         }
         else
-            result = Float.parseFloat(time);
+            result = Integer.parseInt(time);
 
         return result;
     }
@@ -134,6 +140,70 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
             return true;
     }
 
+    public void changeParam(Button preBtn, Button btn, Button nextBtn, String time) {
+        Log.e("AA", "chageParam() 호출됨");
+        LinearLayout.LayoutParams param;
+
+        if (time.equals("A")) {
+            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    150 + 75, 0);
+            param.setMargins(0, 75, 0, 0);
+            btn.setLayoutParams(param);
+            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    150 - 75, 0);
+            param.setMargins(0, 0, 0, 0);
+            nextBtn.setLayoutParams(param);
+        } else if (time.equals("B")) {
+            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    0, 0);
+            preBtn.setLayoutParams(param);
+            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    150 + 75, 0);
+            param.setMargins(0, 0, 0, 0);
+
+            for (int i = 0; i < list.size(); i++)
+                if (list.get(i).btn == preBtn && preBtn.getText().toString().equals(""))
+                    param.setMargins(0, 150, 0, 0);
+
+            btn.setLayoutParams(param);
+            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    150 - 75, 0);
+            param.setMargins(0, 0, 0, 0);
+            nextBtn.setLayoutParams(param);
+        } else if (time.equals("C")) {
+            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    150 + 75, 0);
+            param.setMargins(0, 0, 0, 0);
+            for (int i = 0; i < list.size(); i++)
+                if (list.get(i).btn == preBtn && !list.get(i).end.equals("B"))
+                    param.setMargins(0, 75, 0, 0);
+            btn.setLayoutParams(param);
+            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    0, 0);
+            param.setMargins(0, 0, 0, 0);
+            nextBtn.setLayoutParams(param);
+        } else if (time.equals("D")) {
+            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    150 + 75, 0);
+            param.setMargins(0, 0, 0, 0);
+            btn.setLayoutParams(param);
+            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    150 - 75, 0);
+            param.setMargins(0, 0, 0, 0);
+            nextBtn.setLayoutParams(param);
+        } else if (time.equals("E")) {
+            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    150 + 75, 0);
+            param.setMargins(0, 0, 0, 0);
+
+            for (int i = 0; i < list.size(); i++)
+                if (list.get(i).btn == preBtn && list.get(i).end.equals("6"))
+                    param.setMargins(0, 75, 0, 0);
+
+            btn.setLayoutParams(param);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         for (int i = 0; i < list.size(); i++) {
@@ -141,7 +211,9 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
                 builder = new AlertDialog.Builder(this);
                 builder.setTitle("수업 정보")
                         .setMessage("과목: " + list.get(i).subject + "\n교수: " +
-                                list.get(i).professor + "\n학과: " + list.get(i).major)
+                                list.get(i).professor + "\n학과: " + list.get(i).major
+                                + "\n강의 시간 : " + list.get(i).start + "교시 - " + list.get(i).end
+                                + "교시")
                         .setCancelable(false)
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
@@ -157,13 +229,15 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
 
     class TimeList {
         Button btn;
-        String subject, professor, major;
+        String subject, professor, major, start, end;
 
-        public TimeList(Button btn, String subject, String professor, String major) {
+        public TimeList(Button btn, String subject, String professor, String major, String start, String end) {
             this.btn = btn;
             this.subject = subject;
             this.professor = professor;
             this.major = major;
+            this.start = start;
+            this.end = end;
         }
     }
 
