@@ -24,7 +24,7 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
     Button modifyBtn, allBtn, removeBtn, cancelBtn;
     boolean onModify;
     AlertDialog.Builder builder;
-    final String[] items = {"수업정보 조회", "시간표 조회", "알림설정", "예약문의"};
+    final String[] items = {"시간표 조회", "알림설정", "예약문의"};
 
     DBHelper_Recent dbHelper;
 
@@ -56,12 +56,16 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
                 Toast.makeText(getContext(), items[which] + " 선택!", Toast.LENGTH_SHORT).show();
                 switch (which) {
                     case 0:
+                        if (building.equals("IT대학")) {
+                            Intent myIntent = new Intent(getContext(), TimeTableActivity.class);
+                            myIntent.putExtra("classroom", classRoom);
+                            myIntent.putExtra("building", building);
+                            startActivity(myIntent);
+                        }
                         break;
                     case 1:
                         break;
                     case 2:
-                        break;
-                    case 3:
                         if (building.equals("IT대학")) {
                             Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + ClassFragment.itTel));
                             startActivity(callIntent);
