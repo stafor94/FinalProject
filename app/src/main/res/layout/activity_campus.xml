@@ -34,12 +34,11 @@
              <LinearLayout
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
-                 android:layout_weight="1"
-                    >
+                 android:layout_weight="1">
 
                  <Button
                      android:id="@+id/btn_b0"
-                     android:layout_width="match_parent"
+                     android:layout_width="wrap_content"
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
                      android:background="@drawable/gachon_structure"
@@ -48,38 +47,40 @@
                      android:textColor="@android:color/transparent" />
 
              </LinearLayout>
-                 <LinearLayout
-                     android:layout_width="match_parent"
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1">
+
+                 <Button
+                     android:id="@+id/btn_b1"
+                     android:layout_width="wrap_content"
                      android:layout_height="match_parent"
-                     android:layout_weight="1">
-                     <Button
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:layout_margin="1.5dp"
-                         android:id="@+id/btn_b1"
-                         android:tag="build1"
-                         android:text="비전타워"
-                         android:textColor="@android:color/transparent"
-                         android:background="@drawable/visiontower"
-                         />
+                     android:layout_margin="1.5dp"
+                     android:background="@drawable/visiontower"
+                     android:tag="build1"
+                     android:text="비전타워"
+                     android:textColor="@android:color/transparent" />
 
 
-                 </LinearLayout>
-                 <LinearLayout
-                     android:layout_width="match_parent"
+             </LinearLayout>
+
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1">
+
+                 <Button
+                     android:id="@+id/btn_b2"
+                     android:layout_width="wrap_content"
                      android:layout_height="match_parent"
-                     android:layout_weight="1">
-                     <Button
-                         android:layout_width="match_parent"
-                         android:layout_height="match_parent"
-                         android:layout_margin="1.5dp"
-                         android:id="@+id/btn_b2"
-                         android:tag="build2"
-                         android:text="법과대학"
-                         android:textColor="@android:color/transparent"
-                         android:background="@drawable/law"
-                         />
-                 </LinearLayout>
+                     android:layout_margin="1.5dp"
+                     android:background="@drawable/law"
+                     android:tag="build2"
+                     android:text="법과대학"
+                     android:textColor="@android:color/transparent" />
+             </LinearLayout>
 
          </LinearLayout>
 
@@ -94,53 +95,51 @@
              <LinearLayout
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
-                 android:layout_weight="1"
-                 >
+                 android:layout_weight="1">
+
                  <Button
                      android:id="@+id/btn_b3"
-                     android:layout_width="match_parent"
+                     android:layout_width="wrap_content"
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
+                     android:background="@drawable/engineering1"
                      android:tag="build3"
                      android:text="공과대학1"
-                     android:textColor="@android:color/transparent"
-                     android:background="@drawable/engineering1"
-                    />
+                     android:textColor="@android:color/transparent" />
 
              </LinearLayout>
 
              <LinearLayout
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
-                 android:layout_weight="1"
-                 >
+                 android:layout_weight="1">
+
                  <Button
                      android:id="@+id/btn_b4"
-                     android:layout_width="match_parent"
+                     android:layout_width="wrap_content"
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
+                     android:background="@drawable/engineering2"
                      android:tag="build4"
                      android:text="공과대학2"
-                     android:textColor="@android:color/transparent"
-                     android:background="@drawable/engineering2"/>
+                     android:textColor="@android:color/transparent" />
 
              </LinearLayout>
 
              <LinearLayout
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
-                 android:layout_weight="1"
-                 >
+                 android:layout_weight="1">
+
                  <Button
                      android:id="@+id/btn_b5"
-                     android:layout_width="match_parent"
+                     android:layout_width="wrap_content"
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
+                     android:background="@drawable/nano"
                      android:tag="build5"
                      android:text="바이오나노대학"
-                     android:textColor="@android:color/transparent"
-                     android:background="@drawable/nano"
-                    />
+                     android:textColor="@android:color/transparent" />
              </LinearLayout>
 
 
@@ -165,13 +164,13 @@
 
                  <Button
                      android:id="@+id/btn_b6"
-                     android:layout_width="match_parent"
+                     android:layout_width="wrap_content"
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
+                     android:background="@drawable/computer"
                      android:tag="build6"
                      android:text="IT대학"
-                     android:textColor="@android:color/transparent"
-                     android:background="@drawable/computer"/>
+                     android:textColor="@android:color/transparent" />
              </LinearLayout>
 
              <LinearLayout
@@ -181,14 +180,13 @@
 
                  <Button
                      android:id="@+id/btn_b7"
-                     android:layout_width="match_parent"
+                     android:layout_width="wrap_content"
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
+                     android:background="@drawable/medicine"
                      android:tag="build7"
                      android:text="한의과대학"
-                     android:textColor="@android:color/transparent"
-                     android:background="@drawable/medicine"
-                    />
+                     android:textColor="@android:color/transparent" />
 
              </LinearLayout>
 
@@ -199,13 +197,13 @@
 
                  <Button
                      android:id="@+id/btn_b8"
-                     android:layout_width="match_parent"
+                     android:layout_width="wrap_content"
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
                      android:background="@drawable/art1"
                      android:tag="build8"
                      android:text="예술대학1"
-                     android:textColor="@android:color/transparent"  />
+                     android:textColor="@android:color/transparent" />
 
              </LinearLayout>
 
@@ -219,31 +217,31 @@
              android:layout_weight="1"
              android:gravity="center_horizontal"
              android:orientation="horizontal">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
 
-            <Button
-                android:id="@+id/btn_b9"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="1.5dp"
-                android:tag="build9"
-                android:text="예술대학2"
-                android:textColor="@android:color/transparent"
-                android:background="@drawable/art2"/>
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_weight="1">
+
+                 <Button
+                     android:id="@+id/btn_b9"
+                     android:layout_width="wrap_content"
+                     android:layout_height="match_parent"
+                     android:layout_margin="1.5dp"
+                     android:background="@drawable/art2"
+                     android:tag="build9"
+                     android:text="예술대학2"
+                     android:textColor="@android:color/transparent" />
              </LinearLayout>
 
              <LinearLayout
                  android:layout_width="match_parent"
                  android:layout_height="match_parent"
-                 android:layout_weight="1"
-                 >
+                 android:layout_weight="1">
 
                  <Button
                      android:id="@+id/btn_b10"
-                     android:layout_width="match_parent"
+                     android:layout_width="wrap_content"
                      android:layout_height="match_parent"
                      android:layout_margin="1.5dp"
                      android:background="@drawable/english"

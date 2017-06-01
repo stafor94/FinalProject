@@ -43,6 +43,7 @@ public class SeekActivity extends AppCompatActivity {
                 imageView.setImageResource(sectionItImage[0]);
             break;
         }
+        changeFragment(1);
     }
 
     public void setUp() {
@@ -144,17 +145,21 @@ public class SeekActivity extends AppCompatActivity {
                         select = Integer.parseInt(((Button) v).getText().toString()) - 1;    // [] 0 ~ 5
                         imageView.setImageResource(sectionItImage[select]); //층수 누를때마다 단면도 바뀌게
 
-                        fragment = new ClassFragment();
-                        Bundle bundle = new Bundle();
-                        bundle.putString("building", building);
-                        bundle.putInt("floor", floor);
-                        fragment.setArguments(bundle);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
+                        changeFragment(floor);
                     }
                 }
             });
             count++;
         }
+    }
+
+    public void changeFragment(int floor) {
+        fragment = new ClassFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("building", building);
+        bundle.putInt("floor", floor);
+        fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
     }
 
 }

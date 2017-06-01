@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     CampusFragment campusFrag;
     RecentFragment recentFrag;
+    BookmarkFragment bookmarkFrag;
     SettingsFragment settingsFrag;
 
     private DBHelper_Profile dbHelper;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         // 앱 실행 시 홈 화면을 보여준다
         campusFrag = new CampusFragment();
         recentFrag = new RecentFragment();
+        bookmarkFrag = new BookmarkFragment();
         settingsFrag = new SettingsFragment();
         // 기본적으로 홈 화면을 보여줌
         getSupportFragmentManager().beginTransaction().add(R.id.container, campusFrag).commit();
@@ -50,7 +52,8 @@ public class MainActivity extends AppCompatActivity {
         //TabLayout의 addTab() 메서드를 사용하여 탭 버튼을 추가
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("캠퍼스 맵"));
-        tabs.addTab(tabs.newTab().setText("최근 조회"));
+        tabs.addTab(tabs.newTab().setText("즐겨찾기"));
+        tabs.addTab(tabs.newTab().setText("최근조회"));
         tabs.addTab(tabs.newTab().setText("설정"));
 
         //탭에 OnTabSelectedListener 설정
@@ -65,8 +68,10 @@ public class MainActivity extends AppCompatActivity {
                 if (position == 0) {
                     selected = campusFrag;
                 } else if (position == 1) {
-                    selected = recentFrag;
+                    selected = bookmarkFrag;
                 } else if (position == 2) {
+                    selected = recentFrag;
+                } else if (position == 3) {
                     selected = settingsFrag;
                 }
                 //선택된 프래그먼트를 메인 액티비티의 contained에 담아서 표시
