@@ -142,69 +142,44 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void changeParam(Button preBtn, Button btn, Button nextBtn, String time) {
-        LinearLayout.LayoutParams param;
 
         if (time.equals("A")) {
             isFirst = true;
-            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    150 + 75, 0);
-            param.setMargins(0, 75, 0, 0);
-            btn.setLayoutParams(param);
-            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    150 - 75, 0);
-            param.setMargins(0, 0, 0, 0);
-            nextBtn.setLayoutParams(param);
+            btn.setLayoutParams(getMargines(150 + 75, 75));
+            nextBtn.setLayoutParams(getMargines(150 - 75, 0));
         } else if (time.equals("B")) {
             if (!list.contains(preBtn)) {
-                param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                        0, 0);
-                preBtn.setLayoutParams(param);
+                preBtn.setLayoutParams(getMargines(0, 0));
             }
-
-            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    150 + 75, 0);
             if (!isFirst)
-                param.setMargins(0, 150, 0, 0);
+                btn.setLayoutParams(getMargines(150 + 75, 150));
             else
-                param.setMargins(0, 0, 0, 0);
-            btn.setLayoutParams(param);
-
-            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    150 - 75, 0);
-            param.setMargins(0, 0, 0, 0);
-            nextBtn.setLayoutParams(param);
+                btn.setLayoutParams(getMargines(150 + 75, 0));
+            nextBtn.setLayoutParams(getMargines(150 - 75, 0));
         } else if (time.equals("C")) {
-            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    150 + 75, 0);
-            param.setMargins(0, 0, 0, 0);
+            btn.setLayoutParams(getMargines(150 + 75, 0));
             for (int i = 0; i < list.size(); i++)
                 if (list.get(i).btn == preBtn && !list.get(i).end.equals("B") && !list.get(i).start.equals("B"))
-                    param.setMargins(0, 75, 0, 0);
-            btn.setLayoutParams(param);
-            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    0, 0);
-            param.setMargins(0, 0, 0, 0);
-            nextBtn.setLayoutParams(param);
+                    btn.setLayoutParams(getMargines(150 + 75, 75));
+            nextBtn.setLayoutParams(getMargines(0, 0));
         } else if (time.equals("D")) {
-            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    150 + 75, 0);
-            param.setMargins(0, 0, 0, 0);
-            btn.setLayoutParams(param);
-            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    150 - 75, 0);
-            param.setMargins(0, 0, 0, 0);
-            nextBtn.setLayoutParams(param);
+            btn.setLayoutParams(getMargines(150 + 75, 0));
+            nextBtn.setLayoutParams(getMargines(150 - 75, 0));
         } else if (time.equals("E")) {
-            param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                    150 + 75, 0);
-            param.setMargins(0, 0, 0, 0);
-
+            btn.setLayoutParams(getMargines(150 + 75, 0));
             for (int i = 0; i < list.size(); i++)
                 if (list.get(i).btn == preBtn && list.get(i).end.equals("6"))
-                    param.setMargins(0, 75, 0, 0);
-
-            btn.setLayoutParams(param);
+                    btn.setLayoutParams(getMargines(150 + 75, 75));
         }
+    }
+
+    public LinearLayout.LayoutParams getMargines(int heigth, int top) {
+        LinearLayout.LayoutParams param;
+        param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                heigth, 0);
+        param.setMargins(0, top, 0, 0);
+
+        return param;
     }
 
     @Override

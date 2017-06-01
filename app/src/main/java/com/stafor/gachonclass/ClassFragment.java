@@ -37,7 +37,7 @@ public class ClassFragment extends Fragment {
     public static final String medicineTel = "031-750-5401"; //한의학
     public static final String artTel = "031-750-5851"; //예술대
     public static final String englishTel = "031-750-5114";  //학교번호
-    final String[] items = {"수업정보 조회", "시간표 조회", "알림설정", "예약문의"};
+    final String[] items = {"시간표 조회", "알림설정", "예약문의"};
 
     @Nullable
     @Override
