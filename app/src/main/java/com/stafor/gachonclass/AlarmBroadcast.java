@@ -19,7 +19,7 @@ public class AlarmBroadcast extends BroadcastReceiver {
         NotificationManager notificationmanager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
         Notification.Builder builder = new Notification.Builder(context);
-        builder.setTicker("HETT").setWhen(System.currentTimeMillis())
+        builder.setSmallIcon(R.drawable.menu).setTicker("HETT").setWhen(System.currentTimeMillis())
                 .setNumber(1).setContentTitle("수업 알림").setContentText("설정한 시간이 되었습니다!")
                 .setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE).setContentIntent(pendingIntent).setAutoCancel(true);
 

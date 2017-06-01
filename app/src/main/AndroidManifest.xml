@@ -28,12 +28,6 @@
         <activity android:name=".AlarmActivity" />
 
         <receiver android:name=".AlarmBroadcast"></receiver>
-        <receiver android:name=".AlarmReceiver">
-            <intent-filter>
-                <action android:name="com.stafor.gachonclass.ALARM_START" />
-            </intent-filter>
-        </receiver>
-        <service android:name=".AlarmSoundService" ></service>
 
     </application>
 </manifest>

@@ -8,10 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -59,6 +61,7 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.btn_ok:
                 new AlarmHATT(getApplicationContext()).Alarm();
+                Toast.makeText(this, "알림이 설정되었습니다", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             case R.id.btn_cancel:
@@ -121,10 +124,11 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
             Calendar calendar = Calendar.getInstance();
             //알람시간 calendar에 set해주기
 
-            calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 3, 14, 0);
+            calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), 3, 23, 0);
 
             //알람 예약
             am.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), sender);
+            Log.e("am", "알람 예약");
         }
     }
 
