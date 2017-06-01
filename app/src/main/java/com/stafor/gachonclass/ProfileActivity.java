@@ -48,7 +48,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     grade = 1;
                 else if (checkedId == R.id.rb_2)
                     grade = 2;
-                else if (checkedId == R.id.rb_3)
+                else if (checkedId == R.id.rb_1)
                     grade = 3;
                 else if (checkedId == R.id.rb_4)
                     grade = 4;
