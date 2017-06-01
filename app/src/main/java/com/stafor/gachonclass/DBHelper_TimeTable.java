@@ -16,7 +16,7 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "CLASS.db"; //로컬db명
     private static final String TABLE_NAME = "ITtable";
     private static final String FILE_NAME = "CLASS.db";
-    private static final int SCHEMA_VERSION = 7; //로컬db 버전
+    private static final int SCHEMA_VERSION = 8; //로컬db 버전
 
     SQLiteDatabase db;
     Cursor cursor;

@@ -20,14 +20,16 @@ public class DBHelper_ClassRoom extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "CLASSROOMS.db"; //로컬db명
     private static final String TABLE_NAME = "classrooms";
     private static final String FILE_NAME = "CLASSROOMS.db";
-    private static final int SCHEMA_VERSION = 1; //로컬db 버전
+    private static final int SCHEMA_VERSION = 2; //로컬db 버전
 
     SQLiteDatabase db;
     Cursor cursor;
+    Context context;
 
     public DBHelper_ClassRoom(Context context)    {
         super(context, DATABASE_NAME, null, SCHEMA_VERSION);
         setDB(context); // setDB에 context 부여
+        this.context = context;
     }
 
     @Override
@@ -36,6 +38,8 @@ public class DBHelper_ClassRoom extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        context.deleteDatabase(DATABASE_NAME);
+        setDB(context);
     }
 
     public static void setDB(Context ctx) {

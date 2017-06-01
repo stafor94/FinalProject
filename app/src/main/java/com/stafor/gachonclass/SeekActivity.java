@@ -104,7 +104,7 @@ public class SeekActivity extends AppCompatActivity {
         else if(building.equals("법과대학"))
             createButtons(1, 6);
         else if(building.equals("IT대학"))
-            createButtons(2, 6);
+            createButtons(1, 6);
         else if(building.equals("한의과대학"))
             createButtons(1, 5);
         else if(building.equals("예술대학1"))
