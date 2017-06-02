@@ -79,6 +79,8 @@ public class ClassFragment extends Fragment {
                 }
                 if (which == 1 && building.equals("IT대학")) {
                     Intent myIntent = new Intent(getContext(), AlarmActivity.class);
+                    myIntent.putExtra("start", 0);
+                    myIntent.putExtra("end", 0);
                     startActivity(myIntent);
                 }
                 if (which == 2 && building.equals("IT대학")){

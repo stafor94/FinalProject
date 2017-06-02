@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 //매일할일 DBHelper 클래스
 public class DBHelper_Profile extends SQLiteOpenHelper {
@@ -15,7 +16,7 @@ public class DBHelper_Profile extends SQLiteOpenHelper {
     // Database name
     private static final String DATABASE_NAME = "Profile.db";
     // Database version
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 13;
     // Table name
     private static final String TABLE_NAME = "profileTable";
 
@@ -33,7 +34,8 @@ public class DBHelper_Profile extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         /* 테이블을 생성하기 위해 sql문으로 작성하여 execSQL 문 실행 */
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "( _id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, grade INTEGER, major TEXT);");
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "( _id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT," +
+                " grade INTEGER, major TEXT, sound INTEGER, vibe INTEGER);");
     }
 
      /* 데이터베이스 Version Upgrade
@@ -51,8 +53,22 @@ public class DBHelper_Profile extends SQLiteOpenHelper {
     // 테이블의 레코드 insert
     public void insert(String name, String grade, String major) {
         db = getWritableDatabase();
+        int sound = (SettingsFragment.boolSound ? 1:0);
+        int vibe = (SettingsFragment.boolVibe ? 1:0);
 
-        db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES(null, '" + name + "', " + grade + ", '" + major + "');");
+        delete();
+        db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES(null, '" + name + "', " + grade + ", '" +
+                major + "', " +  sound + ", " + vibe + ");");
+        db.close();
+    }
+
+    public void update(int sound, int vibe) {
+        SQLiteDatabase db = getWritableDatabase();
+        // 입력한 항목과 일치하는 행의 가격 정보 수정
+        Log.e("update", "update sound = " + Integer.toString(sound) + " vibe = " + Integer.toString(vibe));
+        String query = "UPDATE " + TABLE_NAME + " SET sound = " + sound + ", vibe = " + vibe +
+                " WHERE _id = 1;";
+        db.execSQL(query);
         db.close();
     }
 
@@ -60,7 +76,7 @@ public class DBHelper_Profile extends SQLiteOpenHelper {
     public void delete() {
         db = getWritableDatabase();
 
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME + ";");
+        db.execSQL("DELETE * FROM " + TABLE_NAME + ";");
         db.close();
     }
 
@@ -73,12 +89,14 @@ public class DBHelper_Profile extends SQLiteOpenHelper {
 
         if (cursor.moveToLast() == false) {
             str = "";
-        } else if (index != 2) {
-            str += cursor.getString(index);
-        } else {
+        } else if (index == 2 || index > 3) {
             str += Integer.toString(cursor.getInt(index));
+            Log.e("update", "printData " + Integer.toString(index) + " = " + str);
+        } else {
+            str += cursor.getString(index);
         }
         cursor.close();
+
         return str;
     }
 }

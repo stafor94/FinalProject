@@ -43,7 +43,8 @@ public class SeekActivity extends AppCompatActivity {
                 imageView.setImageResource(sectionItImage[0]);
             break;
         }
-        changeFragment(1);
+        if (building.equals("IT대학"))
+            changeFragment(1);
     }
 
     public void setUp() {
