@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +22,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     Switch vibeSwitch, soundSwitch;
     int intVibe, intSound;
 
-    final int REQUEST_CODE = 1001;
+    final int REQUEST_CODE = 1001;  // 프로필 입력 요청코드
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,26 +41,29 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         boolVibe = dbHelper.printData(5).equals("1") ? true:false;  // 1이면 true 아니면 false
         intVibe = (boolVibe ? 1:0);
         intSound = (boolSound ? 1:0);
-        Log.e("bool", dbHelper.printData(4) + "|" + dbHelper.printData(5));
+
+        // 소리 스위치
         soundSwitch = (Switch) rootView.findViewById(R.id.switch_sound);
         soundSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 boolSound = isChecked;
                 intSound = (boolSound ? 1:0);
-                dbHelper.update(intSound, intVibe);
+                dbHelper.update(intSound, intVibe); // Profile DB의 정보 수정
             }
         });
+        // 진동 스위치
         vibeSwitch = (Switch) rootView.findViewById(R.id.switch_vibe);
         vibeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 boolVibe = isChecked;
                 intVibe = (boolVibe ? 1:0);
-                dbHelper.update(intSound, intVibe);
+                dbHelper.update(intSound, intVibe); // Profile DB의 정보 수정
             }
         });
 
+        // DB에 사용자의 이름이 있으면 Profile DB에서 스위치 정보를 받아와서 설정한다
         if (!MainActivity.name.equals("")) {
             soundSwitch.setChecked(boolSound);
             vibeSwitch.setChecked(boolVibe);

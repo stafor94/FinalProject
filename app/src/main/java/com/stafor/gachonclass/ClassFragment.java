@@ -100,7 +100,6 @@ public class ClassFragment extends Fragment {
         Date now = new Date();
         cur_week = new SimpleDateFormat("EEE", Locale.UK).format(now);
         cur_hour = new SimpleDateFormat("HH").format(now);
-        cur_hour = "9";
         cur_min = new SimpleDateFormat("mm").format(now);
         weekTv.setText(cur_week);
         hourTv.setText(cur_hour);

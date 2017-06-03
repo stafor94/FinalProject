@@ -20,6 +20,7 @@ public class AlarmBroadcast extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        // Sound Uri를 받아온다
         Uri soundUri= RingtoneManager.getActualDefaultRingtoneUri(context, RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationManager notificationmanager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -33,7 +34,9 @@ public class AlarmBroadcast extends BroadcastReceiver {
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
+        dbHelper = new DBHelper_Profile(context);
         boolean sound, vibe;
+        // Profile DB에서 사용자의 소리 설정과 진동 설정 값을 받아온다
         sound = (dbHelper.printData(4).equals("1") ? true:false);
         vibe = (dbHelper.printData(5).equals("1") ? true:false);
 
@@ -42,16 +45,17 @@ public class AlarmBroadcast extends BroadcastReceiver {
             Toast.makeText(context, "소리 on, 진동 off", Toast.LENGTH_SHORT).show();
         }
         else if (!sound && vibe) { //소리off, 진동on
-            builder.setVibrate(new long[]{100, 200, 50, 200, 300, 200, 50, 200, 200, 500});
+            builder.setVibrate(new long[]{100, 200, 100, 200});
             Toast.makeText(context, "소리 off, 진동 on", Toast.LENGTH_SHORT).show();
         }
         else if (sound && vibe) { //소리on, 진동on
             builder.setSound(soundUri);
-            builder.setVibrate(new long[]{100,200, 50,200, 300, 200, 50, 200, 200, 300});
+            builder.setVibrate(new long[]{100, 200, 100, 200});
             Toast.makeText(context, "소리 on, 진동 on", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "소리 off, 진동 off", Toast.LENGTH_SHORT).show();
         }
-        notificationmanager.notify(1, builder.build());
+
+        notificationmanager.notify(1, builder.build()); // 알림을 등록
     }
 }

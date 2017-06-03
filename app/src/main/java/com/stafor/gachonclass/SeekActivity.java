@@ -157,8 +157,8 @@ public class SeekActivity extends AppCompatActivity {
     public void changeFragment(int floor) {
         fragment = new ClassFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("building", building);
-        bundle.putInt("floor", floor);
+        bundle.putString("building", building); // 건물 이름
+        bundle.putInt("floor", floor);  // 층수
         fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.frame, fragment).commit();
     }
