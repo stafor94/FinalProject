@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,9 +23,10 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
     Button modifyBtn, allBtn, removeBtn, cancelBtn;
     boolean onModify;
     AlertDialog.Builder builder;
-    final String[] items = {"시간표 조회", "알림설정", "예약문의"};
+    final String[] items = {"시간표 조회", "알림설정", "예약문의", "즐겨찾기 등록"};
 
-    DBHelper_Recent dbHelper;
+    DBHelper_Recent dbHelper_recent;
+    DBHelper_Bookmark dbHelper_bookmark;
 
     @Nullable
     @Override
@@ -34,7 +34,8 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.activity_recent, container, false);
 
         onModify = false;
-        dbHelper = new DBHelper_Recent(getContext());
+        dbHelper_recent = new DBHelper_Recent(getContext());
+        dbHelper_bookmark = new DBHelper_Bookmark(getContext());
         layout = (LinearLayout) rootView.findViewById(R.id.layout_btns);
         layout_bottom = (LinearLayout) rootView.findViewById(R.id.layout_bottom);
         modifyBtn = (Button) rootView.findViewById(R.id.btn_modify);
@@ -53,7 +54,6 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getContext(), items[which] + " 선택!", Toast.LENGTH_SHORT).show();
                 switch (which) {
                     case 0:
                         if (building.equals("IT대학")) {
@@ -64,12 +64,17 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
                         }
                         break;
                     case 1:
+                        Intent myIntent = new Intent(getContext(), AlarmActivity.class);
+                        startActivity(myIntent);
                         break;
                     case 2:
                         if (building.equals("IT대학")) {
                             Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + ClassFragment.itTel));
                             startActivity(callIntent);
                         }
+                        break;
+                    case 3:
+                        dbHelper_bookmark.insert(building, floor, classRoom);
                         break;
                 }
             }
@@ -80,14 +85,14 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
     }
 
     public void initData() {
-        int count = dbHelper.checkTableCount(); // table 내의 행 개수를 받아온다
+        int count = dbHelper_recent.checkTableCount(); // table 내의 행 개수를 받아온다
         try {
             for (int i = 0; i < count; i++) {
-                id = dbHelper.printData(i, 0);
-                building = dbHelper.printData(i, 1);
-                floor = dbHelper.printData(i, 2);
-                classRoom = dbHelper.printData(i, 3);
-                time = dbHelper.printData(i, 4);
+                id = dbHelper_recent.printData(i, 0);
+                building = dbHelper_recent.printData(i, 1);
+                floor = dbHelper_recent.printData(i, 2);
+                classRoom = dbHelper_recent.printData(i, 3);
+                time = dbHelper_recent.printData(i, 4);
 
                 if (!building.equals(""))
                     addButton(building, floor, classRoom, time, id);
@@ -160,7 +165,7 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
     public void removeRecent() {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).chk_box.isChecked()) {
-                dbHelper.delete(list.get(i).id);
+                dbHelper_recent.delete(list.get(i).id);
                 list.get(i).layout.setVisibility(View.GONE);
                 list.remove(i--);   // 리스트에서 삭제 후 이전 i로 돌아간다
             }

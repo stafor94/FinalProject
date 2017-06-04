@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -53,7 +52,6 @@ public class BookmarkFragment extends Fragment implements View.OnClickListener{
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getContext(), items[which] + " 선택!", Toast.LENGTH_SHORT).show();
                 switch (which) {
                     case 0:
                         if (building.equals("IT대학")) {
@@ -64,12 +62,17 @@ public class BookmarkFragment extends Fragment implements View.OnClickListener{
                         }
                         break;
                     case 1:
+                        Intent myIntent = new Intent(getContext(), AlarmActivity.class);
+                        startActivity(myIntent);
                         break;
                     case 2:
                         if (building.equals("IT대학")) {
                             Intent callIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + ClassFragment.itTel));
                             startActivity(callIntent);
                         }
+                        break;
+                    case 3:
+                        dbHelper.insert(building, floor, classRoom);
                         break;
                 }
             }

@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,8 +32,6 @@ public class ClassFragment extends Fragment {
     DBHelper_ClassRoom dbHelper_classRoom;
     DBHelper_TimeTable dbHelper_timeTable;
     DBHelper_Bookmark dbHelper_bookmark;
-
-    TextView weekTv, hourTv, minTv;
 
     public static final String gachonTel = "031-750-5151";  //가천관 번호
     public static final String visionTel = "031-750-5551";  //비전타워 번호
@@ -58,10 +54,6 @@ public class ClassFragment extends Fragment {
         dbHelper_classRoom = new DBHelper_ClassRoom(getContext());
         dbHelper_timeTable = new DBHelper_TimeTable(getContext());
 
-        weekTv = (TextView) rootView.findViewById(R.id.tv_week);
-        hourTv = (TextView) rootView.findViewById(R.id.tv_hour);
-        minTv = (TextView) rootView.findViewById(R.id.tv_min);
-
         init();
 
         // 다이어로그 생성 밑 설정
@@ -70,7 +62,6 @@ public class ClassFragment extends Fragment {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
                 public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getContext(), items[which] + " 선택!", Toast.LENGTH_SHORT).show();
                 if (which == 0 && building.equals("IT대학")) {
                     Intent myIntent = new Intent(getContext(), TimeTableActivity.class);
                     myIntent.putExtra("classroom", classRoom);
@@ -79,8 +70,6 @@ public class ClassFragment extends Fragment {
                 }
                 if (which == 1 && building.equals("IT대학")) {
                     Intent myIntent = new Intent(getContext(), AlarmActivity.class);
-                    myIntent.putExtra("start", 0);
-                    myIntent.putExtra("end", 0);
                     startActivity(myIntent);
                 }
                 if (which == 2 && building.equals("IT대학")){
@@ -101,9 +90,6 @@ public class ClassFragment extends Fragment {
         cur_week = new SimpleDateFormat("EEE", Locale.UK).format(now);
         cur_hour = new SimpleDateFormat("HH").format(now);
         cur_min = new SimpleDateFormat("mm").format(now);
-        weekTv.setText(cur_week);
-        hourTv.setText(cur_hour);
-        minTv.setText(cur_min);
 
         Bundle bundle = getArguments();
         if (bundle != null) {

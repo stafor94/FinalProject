@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+import android.widget.Toast;
 
 //매일할일 DBHelper 클래스
 public class DBHelper_Bookmark extends SQLiteOpenHelper {
@@ -13,11 +15,11 @@ public class DBHelper_Bookmark extends SQLiteOpenHelper {
     Cursor cursor;
 
     // Database name
-    private static final String DATABASE_NAME = "Bookmark.db";
+    private static final String DATABASE_NAME = "USER.db";
     // Database version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 14;
     // Table name
-    private static final String TABLE_NAME = "bookmarkTable";
+    private static final String TABLE_NAME = "bookmark";
 
     //DBHelper 생성자(Context, DBname, cursor, DBversion)
     public DBHelper_Bookmark(Context context) {
@@ -32,6 +34,7 @@ public class DBHelper_Bookmark extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.e("Bookmark", "onCreate() 호출");
         /* 테이블을 생성하기 위해 sql문으로 작성하여 execSQL 문 실행 */
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "( _id INTEGER PRIMARY KEY AUTOINCREMENT, building TEXT, floor TEXT, classroom TEXT);");
     }
@@ -42,6 +45,7 @@ public class DBHelper_Bookmark extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.e("Bookmark", "onUpgrade() 호출");
         /* 테이블을 업그레이드 하기 위해 SQL문을 작성하여 execSQL문 실행
         *  - 기존의 테이블을 삭제한 후 테이블 재생성*/
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
@@ -52,7 +56,14 @@ public class DBHelper_Bookmark extends SQLiteOpenHelper {
     public void insert(String building, String floor, String classroom) {
         db = getWritableDatabase();
 
-        db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES(null, '" + building +  "', '" + floor + "', '" + classroom + "');");
+        cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE building = '" + building +
+                "' AND CLASSROOM = '" + classroom + "';", null);
+
+        if (cursor.getCount() == 0)
+            db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES(null, '" + building +  "', '" + floor + "', '" + classroom + "');");
+        else
+            Toast.makeText(context, "이미 등록된 강의실 입니다!", Toast.LENGTH_SHORT).show();
+
         db.close();
     }
 

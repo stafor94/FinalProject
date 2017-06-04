@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     BookmarkFragment bookmarkFrag;
     SettingsFragment settingsFrag;
 
-    private DBHelper_Profile dbHelper;
+    private DBHelper_Profile dbHelper_profile;
     SQLiteDatabase db;
     public static String name = "";
     public static String major = "";
@@ -31,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
         startActivity(new Intent(this, SplashAcitivty.class)); // 스플래시 화면을 보여준다
 
-        dbHelper = new DBHelper_Profile(this);
-        db = dbHelper.getReadableDatabase();
-        name = dbHelper.printData(1);
-        major = dbHelper.printData(3);
+        dbHelper_profile = new DBHelper_Profile(this);
+        db = dbHelper_profile.getReadableDatabase();
+        name = dbHelper_profile.printData(1);
+        major = dbHelper_profile.printData(3);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);   // 메서드를 사용해 액션바로 설정
