@@ -84,6 +84,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
             startActivityForResult(myIntent, REQUEST_CODE);
         } else if (v.getId() == R.id.btn_reset) {
             getContext().deleteDatabase("USERDB.db");
+            getContext().deleteDatabase("CAMPUSDB.db");
             Toast.makeText(getContext(), "앱을 재실행해 주세요.", Toast.LENGTH_LONG).show();
             getActivity().finish();
         }

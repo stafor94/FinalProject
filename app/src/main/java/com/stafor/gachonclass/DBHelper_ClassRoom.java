@@ -20,7 +20,7 @@ public class DBHelper_ClassRoom extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "CAMPUSDB.db"; //로컬db명
     private static final String TABLE_NAME = "ITbuildings";
     private static final String FILE_NAME = "CAMPUSDB.db";
-    private static final int SCHEMA_VERSION = 9; //로컬db 버전
+    private static final int SCHEMA_VERSION = 1; //로컬db 버전
 
     SQLiteDatabase db;
     Cursor cursor;
