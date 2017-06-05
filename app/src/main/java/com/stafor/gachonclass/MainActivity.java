@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         startActivity(new Intent(this, SplashAcitivty.class)); // 스플래시 화면을 보여준다
 
         dbHelper_profile = new DBHelper_Profile(this);

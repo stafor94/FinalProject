@@ -22,7 +22,7 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "CAMPUSDB.db"; //로컬db명
     private static final String TABLE_NAME = "ITclasses";
     private static final String FILE_NAME = "CAMPUSDB.db";
-    private static final int SCHEMA_VERSION = 1; //로컬db 버전
+    private static final int SCHEMA_VERSION = 9; //로컬db 버전
 
     SQLiteDatabase db;
     Cursor cursor;
@@ -109,15 +109,18 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
         cursor = db.rawQuery(QUERY, null);
 
         if (cursor.moveToFirst()) {
-            str_start = cursor.getString(3);
-            str_end = cursor.getString(4);
-            int_start = convert(str_start);
-            int_end = convert(str_end);
-            if ((int_start == int_end) && int_start == mHour)
-                return true;
-            else if (int_start <= mHour && int_end > mHour)
-                return true;
+            do {
+                str_start = cursor.getString(3);
+                str_end = cursor.getString(4);
+                int_start = convert(str_start);
+                int_end = convert(str_end);
+                if ((int_start == int_end) && int_start == mHour)
+                    return true;
+                else if (int_start <= mHour && int_end > mHour)
+                    return true;
+            } while (cursor.moveToNext());
         }
+
         return false;
     }
 
@@ -135,8 +138,7 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
         else if (time.equals("E"))
             return 15;
 
-        result = Integer.parseInt(time);
-        result += 8;
+        result = Integer.parseInt(time) + 8; // 1교시는 9시
 
         return result;
     }
