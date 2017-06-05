@@ -116,7 +116,7 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
                 int_end = convert(str_end);
                 if ((int_start == int_end) && int_start == mHour)
                     return true;
-                else if (int_start <= mHour && int_end > mHour)
+                else if (int_start <= mHour && int_end >= mHour)
                     return true;
             } while (cursor.moveToNext());
         }

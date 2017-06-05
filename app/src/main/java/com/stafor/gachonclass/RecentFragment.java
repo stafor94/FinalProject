@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -75,6 +76,7 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
                         break;
                     case 3:
                         dbHelper_bookmark.insert(building, floor, classRoom);
+                        Toast.makeText(getContext(), "즐겨찾기에 등록하였습니다.", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }

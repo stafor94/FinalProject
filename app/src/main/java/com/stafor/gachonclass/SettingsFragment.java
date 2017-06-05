@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -18,7 +19,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
     public static boolean boolVibe, boolSound;
     private DBHelper_Profile dbHelper;
     TextView nameText, majorText, versionText;
-    Button profileBtn;
+    Button profileBtn, resetBtn;
     Switch vibeSwitch, soundSwitch;
     int intVibe, intSound;
 
@@ -35,7 +36,9 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         majorText = (TextView) rootView.findViewById(R.id.tv_major);
         versionText = (TextView) rootView.findViewById(R.id.tv_version);
         profileBtn = (Button) rootView.findViewById(R.id.btn_profile);
+        resetBtn = (Button) rootView.findViewById(R.id.btn_reset);
         profileBtn.setOnClickListener(this);
+        resetBtn.setOnClickListener(this);
 
         boolSound = dbHelper.printData(4).equals("1") ? true:false; // 1이면 true 아니면 false
         boolVibe = dbHelper.printData(5).equals("1") ? true:false;  // 1이면 true 아니면 false
@@ -79,6 +82,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener {
         if (v.getId() == R.id.btn_profile) {
             Intent myIntent = new Intent(getContext(), ProfileActivity.class);
             startActivityForResult(myIntent, REQUEST_CODE);
+        } else if (v.getId() == R.id.btn_reset) {
+            getContext().deleteDatabase("USERDB.db");
+            Toast.makeText(getContext(), "앱을 재실행해 주세요.", Toast.LENGTH_LONG).show();
+            getActivity().finish();
         }
     }
 

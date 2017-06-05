@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import android.widget.Toast;
 
 //매일할일 DBHelper 클래스
@@ -34,9 +33,6 @@ public class DBHelper_Bookmark extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.e("Bookmark", "onCreate() 호출");
-        /* 테이블을 생성하기 위해 sql문으로 작성하여 execSQL 문 실행 */
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "( _id INTEGER PRIMARY KEY AUTOINCREMENT, building TEXT, floor TEXT, classroom TEXT);");
     }
 
      /* 데이터베이스 Version Upgrade
@@ -45,11 +41,6 @@ public class DBHelper_Bookmark extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.e("Bookmark", "onUpgrade() 호출");
-        /* 테이블을 업그레이드 하기 위해 SQL문을 작성하여 execSQL문 실행
-        *  - 기존의 테이블을 삭제한 후 테이블 재생성*/
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        onCreate(db);
     }
 
     // 테이블의 레코드 insert

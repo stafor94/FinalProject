@@ -71,9 +71,6 @@ public class BookmarkFragment extends Fragment implements View.OnClickListener{
                             startActivity(callIntent);
                         }
                         break;
-                    case 3:
-                        dbHelper.insert(building, floor, classRoom);
-                        break;
                 }
             }
         });

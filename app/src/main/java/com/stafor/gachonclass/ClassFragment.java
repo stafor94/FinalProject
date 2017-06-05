@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -78,6 +79,7 @@ public class ClassFragment extends Fragment {
                 }
                 if (which == 3 && building.equals("IT대학")) {
                     dbHelper_bookmark.insert(building, Integer.toString(floor), classRoom);
+                    Toast.makeText(getContext(), "즐겨찾기에 등록하였습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });

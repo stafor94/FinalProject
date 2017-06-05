@@ -195,6 +195,45 @@
                             android:textSize="20sp"
                             android:background="#ffffff" />
                     </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#b3b3b3"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:background="#24839b"
+                    android:gravity="center"
+
+                    android:text="데이터 관리"
+                    android:textColor="#ffffff"
+                    android:textSize="25dp" />
+
+                <Button
+                    android:id="@+id/btn_reset"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="1dp"
+                    android:background="#ffffff"
+                    android:gravity="left|center_vertical"
+                    android:text="사용자 정보 초기화"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="초기화 시 앱 종료"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="20sp" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
