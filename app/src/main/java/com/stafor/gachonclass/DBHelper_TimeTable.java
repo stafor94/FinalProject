@@ -19,10 +19,10 @@ ex)288/613/fri/5/8/기초회로실험1/이달호/전자공학과
  */
 public class DBHelper_TimeTable extends SQLiteOpenHelper {
     public static final String ROOT_DIR = "/data/data/com.stafor.gachonclass/databases/";  //로컬db 저장
-    private static final String DATABASE_NAME = "CAMPUS.db"; //로컬db명
-    private static final String TABLE_NAME = "ITclass";
-    private static final String FILE_NAME = "CAMPUS.db";
-    private static final int SCHEMA_VERSION = 8; //로컬db 버전
+    private static final String DATABASE_NAME = "CAMPUSDB.db"; //로컬db명
+    private static final String TABLE_NAME = "ITclasses";
+    private static final String FILE_NAME = "CAMPUSDB.db";
+    private static final int SCHEMA_VERSION = 1; //로컬db 버전
 
     SQLiteDatabase db;
     Cursor cursor;

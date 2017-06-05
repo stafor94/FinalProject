@@ -15,11 +15,11 @@ public class DBHelper_Bookmark extends SQLiteOpenHelper {
     Cursor cursor;
 
     // Database name
-    private static final String DATABASE_NAME = "USER.db";
+    private static final String DATABASE_NAME = "USERDB.db";
     // Database version
-    private static final int DATABASE_VERSION = 20;
+    private static final int DATABASE_VERSION = 1;
     // Table name
-    private static final String TABLE_NAME = "bookmark";
+    private static final String TABLE_NAME = "bookmarks";
 
     //DBHelper 생성자(Context, DBname, cursor, DBversion)
     public DBHelper_Bookmark(Context context) {
