@@ -72,7 +72,6 @@ public class AlarmActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void getTime() {
-
     }
 
     public class AlarmHATT {
