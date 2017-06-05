@@ -16,7 +16,7 @@ public class DBHelper_Profile extends SQLiteOpenHelper {
     // Database name
     private static final String DATABASE_NAME = "USER.db";
     // Database version
-    private static final int DATABASE_VERSION = 14;
+    private static final int DATABASE_VERSION = 20;
     // Table name
     private static final String TABLE_NAME = "profile";
 
