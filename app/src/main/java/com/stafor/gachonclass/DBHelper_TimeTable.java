@@ -118,9 +118,8 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
                     return true;
                 else if (int_start <= mHour && int_end >= mHour)
                     return true;
-            } while (cursor.moveToNext());
+            }while (cursor.moveToNext());
         }
-
         return false;
     }
 
@@ -138,7 +137,8 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
         else if (time.equals("E"))
             return 15;
 
-        result = Integer.parseInt(time) + 8; // 1교시는 9시
+        result = Integer.parseInt(time);
+        result += 8;
 
         return result;
     }
