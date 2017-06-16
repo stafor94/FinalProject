@@ -58,6 +58,13 @@ public class DBHelper_Recent extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void clear() {
+        db = getWritableDatabase();
+
+        db.execSQL("DELETE FROM " + TABLE_NAME + ";");
+        db.close();
+    }
+
     // 메인페이지 텍스트뷰 출력하기 위한 printdata
     public String printData(int position, int index) {
         db = getReadableDatabase();

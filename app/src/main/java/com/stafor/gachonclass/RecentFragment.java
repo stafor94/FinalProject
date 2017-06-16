@@ -8,28 +8,24 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class RecentFragment extends Fragment implements View.OnClickListener{
-    LinearLayout layout, layout_bottom;
+    int item_position;
     String time, floor, building, classRoom, id;
-    Button modifyBtn, allBtn, removeBtn, cancelBtn;
+    Button resetBtn;
 
-    boolean onModify;   // 편집모드
     AlertDialog.Builder builder;
-    final String[] items = {"시간표 조회", "알림설정", "예약문의", "즐겨찾기 등록"};
+    final String[] items = {"시간표 조회", "알림설정", "예약문의", "즐겨찾기 등록", "삭제"};
 
     DBHelper_Recent dbHelper_recent;
     DBHelper_Bookmark dbHelper_bookmark;
@@ -51,6 +47,7 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // 아이템을 클릭 시 다이어로그를 띄움
+                item_position = position;
                 building = album.get(position).building;
                 floor = album.get(position).floor;
                 classRoom = album.get(position).classRoom;
@@ -59,19 +56,10 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
             }
         });
 
-        onModify = false;   // 편집모드 off
         dbHelper_recent = new DBHelper_Recent(getContext());
         dbHelper_bookmark = new DBHelper_Bookmark(getContext());
-        layout = (LinearLayout) rootView.findViewById(R.id.layout_btns);
-        layout_bottom = (LinearLayout) rootView.findViewById(R.id.layout_bottom);
-        modifyBtn = (Button) rootView.findViewById(R.id.btn_modify);
-        allBtn = (Button) rootView.findViewById(R.id.btn_all);
-        removeBtn = (Button) rootView.findViewById(R.id.btn_ok);
-        cancelBtn = (Button) rootView.findViewById(R.id.btn_cancel);
-        modifyBtn.setOnClickListener(this);
-        allBtn.setOnClickListener(this);
-        removeBtn.setOnClickListener(this);
-        cancelBtn.setOnClickListener(this);
+        resetBtn = (Button) rootView.findViewById(R.id.btn_reset);
+        resetBtn.setOnClickListener(this);
 
         initData(); // SQLite에서 데이터 가져와서 출력
 
@@ -103,6 +91,11 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
                         dbHelper_bookmark.insert(building, floor, classRoom);
                         Toast.makeText(getContext(), "즐겨찾기에 등록하였습니다.", Toast.LENGTH_SHORT).show();
                         break;
+                    case 4:
+                        dbHelper_recent.delete(album.get(item_position).id);
+                        album.remove(item_position);
+                        adapter.notifyDataSetInvalidated();
+                        break;
                 }
             }
         });
@@ -114,17 +107,19 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
     public void initData() {
         int count = dbHelper_recent.checkTableCount(); // table 내의 행 개수를 받아온다
         try {
+            album.clear();  // album을 초기화 한다
             for (int i = 0; i < count; i++) {
+                // DB로 부터 최근 기록의 정보를 불러온다
                 id = dbHelper_recent.printData(i, 0);
                 building = dbHelper_recent.printData(i, 1);
                 floor = dbHelper_recent.printData(i, 2);
                 classRoom = dbHelper_recent.printData(i, 3);
                 time = dbHelper_recent.printData(i, 4);
 
-                if (building.equals("IT대학")) {
+                // iT대학의 최근 기록을 album에 추가
+                if (building.equals("IT대학"))
                     album.add(new ClassItem(R.drawable.computer, building, floor, classRoom,
                             time, Integer.parseInt(id)));
-                }
 
             }
         } catch (Exception e) {
@@ -134,41 +129,14 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btn_modify) { // 수정버튼
-                layout_bottom.setVisibility(View.VISIBLE);
-                modifyBtn.setVisibility(View.GONE);
-                for (int i = 0; i < album.size(); i++) {
-                    album.get(i).checkBox.setVisibility(View.VISIBLE);
-                }
-                onModify = true;
-        } else if (v.getId() == R.id.btn_all) {
-            for (int i = 0; i < album.size(); i++) {
-                album.get(i).checkBox.setChecked(true);
-            }
-        }else if (v.getId() == R.id.btn_ok) {  // 삭제버튼
-            removeRecent();
-        } else if (v.getId() == R.id.btn_cancel) {  // 취소버튼
-            layout_bottom.setVisibility(View.GONE);
-            modifyBtn.setVisibility(View.VISIBLE);
-            for (int i = 0; i < album.size(); i++) {
-                album.get(i).checkBox.setVisibility(View.GONE);
-            }
-            onModify = false;
-        }
-    }
-
-    public void removeRecent() {
-        for (int i = 0; i < album.size(); i++) {
-            if (album.get(i).checkBox.isChecked()) {
-                dbHelper_recent.delete(album.get(i).id);
-                album.remove(i--);   // 리스트에서 삭제 후 이전 i로 돌아간다
-                Log.e("size", "size = " + album.size());
-            }
+        if (v.getId() == R.id.btn_reset) { // 초기화버튼
+            album.clear();
+            dbHelper_recent.clear();
+            adapter.notifyDataSetInvalidated();
         }
     }
 
     class ClassItem {
-        CheckBox checkBox;
         int resId;//이미지 리소스 id
         String building, floor, classRoom, time;
         int id;
@@ -217,12 +185,6 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
         public long getItemId(int position) {
             return position;
         }
-        public void addItem(ClassItem item) {
-            album.add(item);
-        }
-        public void clear() {
-            album.clear();
-        }
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ClassLayout classLayout = null;
@@ -234,7 +196,6 @@ public class RecentFragment extends Fragment implements View.OnClickListener{
             }
 
             ClassItem items = album.get(position);
-            items.checkBox = classLayout.getCheckBox();
             classLayout.setImage(items.getResId());
             classLayout.setNameText(items.getclassRoom());
             classLayout.setTimeText(items.getTime());

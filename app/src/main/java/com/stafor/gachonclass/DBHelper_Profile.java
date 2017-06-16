@@ -71,7 +71,6 @@ public class DBHelper_Profile extends SQLiteOpenHelper {
     public void update(int sound, int vibe) {
         SQLiteDatabase db = getWritableDatabase();
         // 입력한 항목과 일치하는 행의 가격 정보 수정
-        Log.e("update", "update sound = " + Integer.toString(sound) + " vibe = " + Integer.toString(vibe));
         String query = "UPDATE " + TABLE_NAME + " SET sound = " + sound + ", vibe = " + vibe + ";";
         db.execSQL(query);
         db.close();
@@ -97,7 +96,6 @@ public class DBHelper_Profile extends SQLiteOpenHelper {
             str = "";
         } else if (index == 2 || index > 3) {
             str += Integer.toString(cursor.getInt(index));
-            Log.e("update", "printData " + Integer.toString(index) + " = " + str);
         } else {
             str += cursor.getString(index);
         }

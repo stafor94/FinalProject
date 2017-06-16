@@ -66,6 +66,13 @@ public class DBHelper_Bookmark extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void clear() {
+        db = getWritableDatabase();
+
+        db.execSQL("DELETE FROM " + TABLE_NAME + ";");
+        db.close();
+    }
+
     // 메인페이지 텍스트뷰 출력하기 위한 printdata
     public String printData(int position, int index) {
         db = getReadableDatabase();
@@ -93,13 +100,14 @@ public class DBHelper_Bookmark extends SQLiteOpenHelper {
         cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + ";", null);
         cursor.moveToFirst();
 
-        if (cursor.getColumnCount() == 0)
-            count = 0;
-        else {
-            count++;
-            while (cursor.moveToNext())
-                count++;
-        }
+//        if (cursor.getColumnCount() == 0)
+//            count = 0;
+//        else {
+//            count++;
+//            while (cursor.moveToNext())
+//                count++;
+//        }
+        count = cursor.getCount();
 
         return count;
     }

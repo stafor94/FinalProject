@@ -14,78 +14,17 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_modify"
+            android:id="@+id/btn_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:background="@drawable/corner_shape"
-            android:text="편집" />
+            android:text="초기화" />
     </LinearLayout>
-
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="388dp"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="0.52"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
-
-        <LinearLayout
-            android:id="@+id/layout_btns"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-        </LinearLayout>
-    </ScrollView>
 
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
-        android:layout_height="436dp" />
-
-    <LinearLayout
-        android:id="@+id/layout_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/btn_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/corner_shape"
-            android:text="전체선택"
-            android:textSize="25sp" />
-
-        <Button
-            android:id="@+id/btn_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/corner_shape"
-            android:text="삭제"
-            android:textSize="25sp" />
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/corner_shape"
-            android:text="취소"
-            android:textSize="25sp" />
-    </LinearLayout>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
