@@ -184,16 +184,16 @@
                             android:text="  버전 정보"
                             android:textSize="20sp" />
 
-                        <TextView
-                            android:id="@+id/tv_version"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="5dp"
-                            android:paddingTop="5dp"
-                            android:text="1.0.1 (최신)"
-                            android:textColor="@android:color/darker_gray"
-                            android:textSize="20sp"
-                            android:background="#ffffff" />
+                <TextView
+                    android:id="@+id/tv_version"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="1.0.1"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="20sp" />
                     </LinearLayout>
 
             <LinearLayout
