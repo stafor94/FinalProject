@@ -97,6 +97,7 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
         cursor.moveToFirst();
 
         count = cursor.getCount();
+
         return count;
     }
 

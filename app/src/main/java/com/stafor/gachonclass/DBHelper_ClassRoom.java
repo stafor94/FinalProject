@@ -92,13 +92,8 @@ public class DBHelper_ClassRoom extends SQLiteOpenHelper {
         cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE FLOOR = " + floor + ";", null);
         cursor.moveToFirst();
 
-        if (cursor.getColumnCount() == 0)
-            count = 0;
-        else {
-            count++;
-            while (cursor.moveToNext())
-                count++;
-        }
+        count = cursor.getCount();
+
         return count;
     }
 
