@@ -12,7 +12,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SeekActivity extends AppCompatActivity {
+public class SeekActivity extends AppCompatActivity implements View.OnClickListener{
     Fragment fragment;
     Button spreadBtn, spread2Btn;
     GridLayout layout;
@@ -34,17 +34,14 @@ public class SeekActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_seek);
-        this.setFinishOnTouchOutside(false); // 바깥영역 터치로 인한 종료 방지
 
-        setUp();
-        switch (building)       //메인에서 누른 건물에 따라 기본 단면도 이미지 설정.
-        {
-            case  "IT대학":
-                imageView.setImageResource(sectionItImage[0]);
-            break;
-        }
-        if (building.equals("IT대학"))
+        setUp(); // 기본 세팅
+
+        if (building.equals("IT대학")) {
+            //메인에서 누른 건물에 따라 기본 단면도 이미지 설정.
+            imageView.setImageResource(sectionItImage[0]);
             changeFragment(1);
+        }
     }
 
     public void setUp() {
@@ -53,48 +50,47 @@ public class SeekActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
         spreadBtn = (Button) findViewById(R.id.btn_spread);
         spread2Btn = (Button) findViewById(R.id.btn_spread2);
-        spreadBtn.setOnClickListener(myListener);
-        spread2Btn.setOnClickListener(myListener);
-        imageView.setOnClickListener(myListener);
+        spreadBtn.setOnClickListener(this);
+        spread2Btn.setOnClickListener(this);
+        imageView.setOnClickListener(this);
 
         Intent myIntent = getIntent();
         building = myIntent.getStringExtra("building");
         floorTv.setText(building + " " + floor + "F");
-        createFloors(building);
+        createFloors(building); // 층수 버튼 생성
     }
 
-    View.OnClickListener myListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            if (v.getId() == R.id.btn_spread) {
-                if (isSpeard[0]) {
-                    layout.setVisibility(View.GONE);
-                    spreadBtn.setText("층수▽");
-                } else {
-                    layout.setVisibility(View.VISIBLE);
-                    spreadBtn.setText("층수△");
-                }
-                isSpeard[0] = !isSpeard[0];
-            } else if (v.getId() == R.id.btn_spread2) {
-                if (isSpeard[1]) {
-                    imageView.setVisibility(View.GONE);
-                    spread2Btn.setText("단면도▽");
-                } else {
-                    imageView.setVisibility(View.VISIBLE);
-                    spread2Btn.setText("단면도△");
-                }
-                isSpeard[1] = !isSpeard[1];
-            } else if (v.getId() == R.id.imageView && building.equals("IT대학")) {
-                Intent intent = new Intent(getApplicationContext(), ImageActivity.class);
-                intent.putExtra("img", sectionItImage[select]);
-                startActivity(intent);
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btn_spread) {
+            if (isSpeard[0]) {
+                layout.setVisibility(View.GONE);
+                spreadBtn.setText("층수▽");
+            } else {
+                layout.setVisibility(View.VISIBLE);
+                spreadBtn.setText("층수△");
             }
+            isSpeard[0] = !isSpeard[0];
+        } else if (v.getId() == R.id.btn_spread2) {
+            if (isSpeard[1]) {
+                imageView.setVisibility(View.GONE);
+                spread2Btn.setText("단면도▽");
+            } else {
+                imageView.setVisibility(View.VISIBLE);
+                spread2Btn.setText("단면도△");
+            }
+            isSpeard[1] = !isSpeard[1];
+        } else if (v.getId() == R.id.imageView && building.equals("IT대학")) {
+            Intent intent = new Intent(getApplicationContext(), ImageActivity.class);
+            intent.putExtra("img", sectionItImage[select]);
+            startActivity(intent);
         }
-    };
+    }
 
     public void createFloors(String building) {
         if (building.equals("가천관"))
-            createButtons(-3, 7);
+            createButtons(-3, 8);
         else if (building.equals("비전타워"))
             createButtons(1, 6);
         else if (building.equals("공과대학1"))

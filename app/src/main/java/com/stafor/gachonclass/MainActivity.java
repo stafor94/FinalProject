@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-     // deleteDatabase("USERDB.db");
-       // deleteDatabase("CAMPUSDB.db");
         startActivity(new Intent(this, SplashAcitivty.class)); // 스플래시 화면을 보여준다
 
         dbHelper_profile = new DBHelper_Profile(this);
@@ -97,8 +95,6 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
-                            moveTaskToBack(true);	// protect Other Activity after this Activity finish
                             finish();
                             android.os.Process.killProcess(android.os.Process.myPid());
                         }
@@ -106,14 +102,6 @@ public class MainActivity extends AppCompatActivity {
                     .setNegativeButton("취소", null)
                     .show();
         }
-
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        moveTaskToBack(true);	// protect Other Activity after this Activity finish
-        finish();
     }
 }

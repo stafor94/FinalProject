@@ -101,12 +101,12 @@ public class DBHelper_TimeTable extends SQLiteOpenHelper {
         return count;
     }
 
-    public boolean isInClass(String week, String hour, String classRoom) {
+    public boolean isInClass(String weekOfDay, String hour, String classRoom) {
         String str_start, str_end;
         int int_start, int_end, mHour = Integer.parseInt(hour);
         db = getReadableDatabase();
-        week = week.toLowerCase();
-        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE DAY = '" + week + "' AND CLASS = '" + classRoom + "';";
+        weekOfDay = weekOfDay.toLowerCase();
+        String QUERY = "SELECT * FROM " + TABLE_NAME + " WHERE DAY = '" + weekOfDay + "' AND CLASS = '" + classRoom + "';";
         cursor = db.rawQuery(QUERY, null);
 
         if (cursor.moveToFirst()) {

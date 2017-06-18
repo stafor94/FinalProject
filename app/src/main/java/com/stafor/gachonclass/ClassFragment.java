@@ -23,7 +23,7 @@ import java.util.Locale;
 public class ClassFragment extends Fragment {
     GridLayout layout;
     int floor;
-    String building, classRoom, time, cur_week, cur_hour, cur_min;
+    String building, classRoom, time, cur_weekOfDay, cur_hour;
     SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
     AlertDialog.Builder builder;
@@ -89,9 +89,8 @@ public class ClassFragment extends Fragment {
 
     public void init() {
         Date now = new Date();
-        cur_week = new SimpleDateFormat("EEE", Locale.UK).format(now);
+        cur_weekOfDay = new SimpleDateFormat("EEE", Locale.UK).format(now);
         cur_hour = new SimpleDateFormat("HH").format(now);
-        cur_min = new SimpleDateFormat("mm").format(now);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -115,10 +114,11 @@ public class ClassFragment extends Fragment {
             btn.setText(mClassRoom);
             btn.setLayoutParams(param);
 
-            if (dbHelper_timeTable.isInClass(cur_week, cur_hour, mClassRoom))
+            if (dbHelper_timeTable.isInClass(cur_weekOfDay, cur_hour, mClassRoom))
                 btn.setBackgroundColor(getResources().getColor(R.color.colorAccent));
             else
                 btn.setBackgroundColor(getResources().getColor(R.color.colorLightGreen));
+
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
