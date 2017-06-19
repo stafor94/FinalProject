@@ -13,8 +13,6 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
-import static com.stafor.gachonclass.R.id.layout_mon;
-
 public class TimeTableActivity extends AppCompatActivity implements View.OnClickListener {
     LinearLayout[] layout = new LinearLayout[5];
     final int CLASS = 1, DAY = 2, START = 3, END = 4, SUBJECT = 5, PROFESSOR = 6, MAJOR = 7;
@@ -41,7 +39,7 @@ public class TimeTableActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void init() {
-        layout[0] = (LinearLayout) findViewById(layout_mon);
+        layout[0] = (LinearLayout) findViewById(R.id.layout_mon);
         layout[1] = (LinearLayout) findViewById(R.id.layout_tue);
         layout[2] = (LinearLayout) findViewById(R.id.layout_wed);
         layout[3] = (LinearLayout) findViewById(R.id.layout_thu);
